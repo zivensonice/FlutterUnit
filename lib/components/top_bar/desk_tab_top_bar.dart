@@ -10,13 +10,13 @@ class DeskTabTopBar extends StatefulWidget {
   final ValueChanged<int> onTabPressed;
 
 
-  const DeskTabTopBar({Key? key,required this.onTabPressed, required this.tabs}) : super(key: key);
+  const DeskTabTopBar({Key? key, required this.onTabPressed, required this.tabs}) : super(key: key);
 
   @override
   State<DeskTabTopBar> createState() => _DeskTabTopBarState();
 }
 
-class _DeskTabTopBarState extends State<DeskTabTopBar>  with TickerProviderStateMixin {
+class _DeskTabTopBarState extends State<DeskTabTopBar> with TickerProviderStateMixin {
   late TabController tabController;
 
   @override
@@ -27,7 +27,7 @@ class _DeskTabTopBarState extends State<DeskTabTopBar>  with TickerProviderState
 
   @override
   void didUpdateWidget(covariant DeskTabTopBar oldWidget) {
-    if(oldWidget.tabs.length!=widget.tabs.length){
+    if (oldWidget.tabs.length != widget.tabs.length) {
       tabController.dispose();
       tabController = TabController(length: widget.tabs.length, vsync: this);
     }
@@ -36,15 +36,19 @@ class _DeskTabTopBarState extends State<DeskTabTopBar>  with TickerProviderState
 
   @override
   Widget build(BuildContext context) {
-    Color themeColor = Theme.of(context).primaryColor;
+    Color themeColor = Theme
+        .of(context)
+        .primaryColor;
 
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    bool isDark = Theme
+        .of(context)
+        .brightness == Brightness.dark;
 
     return DragToMoveAreaNoDouble(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         height: 64,
-        color: isDark?Color(0xff2C3036):Colors.white,
+        color: isDark ? Color(0xff2C3036) : Colors.white,
         child: Row(
           children: [
             SizedBox(
