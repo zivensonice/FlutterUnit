@@ -31,57 +31,64 @@ class StampData extends ChangeNotifier {
     notifyListeners();
   }
 
-  GameState checkWin(double length){
-    bool redWin = _checkWinByColor(length,Colors.red);
-    if(redWin) return GameState.redWin;
-    
-    bool blueWin = _checkWinByColor(length,Colors.blue);
-    if(blueWin) return GameState.blueWin;
+  GameState checkWin(double length) {
+    bool redWin = _checkWinByColor(length, Colors.red);
+    if (redWin) return GameState.redWin;
+
+    bool blueWin = _checkWinByColor(length, Colors.blue);
+    if (blueWin) return GameState.blueWin;
 
     return GameState.doing;
   }
-  
-  bool _checkWinByColor(double length,Color color) {
-    List<Offset> red = stamps
-        .where((element) => element.color == color)
-        .map((e) => e.center)
-        .toList();
-    List<Point<int>> redPoints = red
-        .map<Point<int>>((e) => Point<int>(e.dx ~/ length, e.dy ~/ length))
-        .toList();
+
+  bool _checkWinByColor(double length, Color color) {
+    List<Offset> red = stamps.where((element) => element.color == color).map((e) => e.center).toList();
+    List<Point<int>> redPoints = red.map<Point<int>>((e) => Point<int>(e.dx ~/ length, e.dy ~/ length)).toList();
 
     return _checkWinInline(redPoints, 3);
   }
 
   bool _checkWinInline(List<Point<int>> points, int max) {
     if (points.length < max) return false;
-      for (int i = 0; i < points.length; i++) {
-        int x = points[i].x;
-        int y = points[i].y;
-        if (_check(x, y, points, CheckModel.horizontal,max)) {
-          return true;
-        } else if (_check(x, y, points, CheckModel.vertical,max)) {
-          return true;
-        } else if (_check(x, y, points, CheckModel.leftDiagonal,max)) {
-          return true;
-        } else if (_check(x, y, points, CheckModel.rightDiagonal,max)) {
-          return true;
-        }
+    for (int i = 0; i < points.length; i++) {
+      int x = points[i].x;
+      int y = points[i].y;
+      if (_check(x, y, points, CheckModel.horizontal, max)) {
+        return true;
+      } else if (_check(x, y, points, CheckModel.vertical, max)) {
+        return true;
+      } else if (_check(x, y, points, CheckModel.leftDiagonal, max)) {
+        return true;
+      } else if (_check(x, y, points, CheckModel.rightDiagonal, max)) {
+        return true;
       }
+    }
     return false;
   }
 
-  bool _check(int x, int y, List<Point> points, CheckModel checkModel,int max) {
+  bool _check(int x, int y, List<Point> points, CheckModel checkModel, int max) {
     int count = 1;
     Point checkPoint;
     for (int i = 1; i < max; i++) {
       switch (checkModel) {
-        case CheckModel.horizontal: checkPoint = Point(x - i, y); break;
-        case CheckModel.vertical: checkPoint = Point(x, y - i); break;
-        case CheckModel.leftDiagonal: checkPoint = Point(x - i, y + i);break;
-        case CheckModel.rightDiagonal: checkPoint = Point(x + i, y + i); break;
+        case CheckModel.horizontal:
+          checkPoint = Point(x - i, y);
+          break;
+        case CheckModel.vertical:
+          checkPoint = Point(x, y - i);
+          break;
+        case CheckModel.leftDiagonal:
+          checkPoint = Point(x - i, y + i);
+          break;
+        case CheckModel.rightDiagonal:
+          checkPoint = Point(x + i, y + i);
+          break;
       }
-      if (points.contains(checkPoint)) {count++;} else {break;}
+      if (points.contains(checkPoint)) {
+        count++;
+      } else {
+        break;
+      }
     }
     if (count == max) return true;
     return false;
@@ -95,7 +102,7 @@ enum CheckModel {
   rightDiagonal // 右斜判断
 }
 
-enum GameState{
+enum GameState {
   doing, // 进行中
   redWin, // 红胜
   blueWin // 蓝胜

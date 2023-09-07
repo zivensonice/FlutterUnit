@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../utils/colors.dart';
 
 class Circle {
-  Point center = const Point(0,0);
+  Point center = const Point(0, 0);
   double radius = 10;
   Color color = Colors.black;
 }
@@ -20,10 +20,8 @@ class _CirclePackingState extends State<CirclePacking> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        setState(() {
-
-        });
+      onTap: () {
+        setState(() {});
       },
       child: CustomPaint(
         painter: CirclePackingPainter(),
@@ -41,7 +39,7 @@ class CirclePackingPainter extends CustomPainter {
   Random random = Random();
 
   void _createCircles(Canvas canvas, Size size) {
-    Circle circle= Circle();
+    Circle circle = Circle();
 
     bool circleSafeToDraw = false;
 
@@ -100,13 +98,11 @@ class CirclePackingPainter extends CustomPainter {
       }
     }
 
-    if (circle.center.x + circle.radius >= size.width ||
-        circle.center.x - circle.radius <= 0) {
+    if (circle.center.x + circle.radius >= size.width || circle.center.x - circle.radius <= 0) {
       return true;
     }
 
-    if (circle.center.y + circle.radius >= size.height ||
-        circle.center.y - circle.radius <= 0) {
+    if (circle.center.y + circle.radius >= size.height || circle.center.y - circle.radius <= 0) {
       return true;
     }
 
@@ -123,5 +119,4 @@ class CirclePackingPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CirclePackingPainter oldDelegate) => true;
-
 }

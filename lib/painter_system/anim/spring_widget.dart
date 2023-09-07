@@ -2,8 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SpringWidget extends StatefulWidget {
-
-   const SpringWidget({Key? key}) : super(key: key);
+  const SpringWidget({Key? key}) : super(key: key);
 
   @override
   _SpringWidgetState createState() => _SpringWidgetState();
@@ -17,9 +16,9 @@ const double _kK = 3;
 class _SpringWidgetState extends State<SpringWidget> with SingleTickerProviderStateMixin {
   ValueNotifier<double> height = ValueNotifier(_kDefaultSpringHeight);
 
- late AnimationController _ctrl;
+  late AnimationController _ctrl;
 
-  double s = 0;  // 移动距离
+  double s = 0; // 移动距离
   double laseMoveLen = 0;
 
   late Animation<double> animation;
@@ -29,8 +28,7 @@ class _SpringWidgetState extends State<SpringWidget> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _ctrl = AnimationController(vsync: this, duration: animDuration)
-      ..addListener(_updateHeightByAnim);
+    _ctrl = AnimationController(vsync: this, duration: animDuration)..addListener(_updateHeightByAnim);
     // animation = CurvedAnimation(parent: _ctrl, curve: Curves.bounceOut);
     animation = CurvedAnimation(parent: _ctrl, curve: const Interpolator());
   }
@@ -53,11 +51,10 @@ class _SpringWidgetState extends State<SpringWidget> with SingleTickerProviderSt
       onVerticalDragUpdate: _updateSpace,
       onVerticalDragEnd: _animateToDefault,
       child: Container(
-            width: 200,
-            height: 200,
-            color: Colors.grey.withAlpha(11),
-            child: CustomPaint(
-                painter: SpringPainter(height: height)),
+        width: 200,
+        height: 200,
+        color: Colors.grey.withAlpha(11),
+        child: CustomPaint(painter: SpringPainter(height: height)),
       ),
     );
   }
@@ -91,14 +88,13 @@ class Interpolator extends Curve {
   }
 }
 
-
 const double _kSpringWidth = 30;
 
 class SpringPainter extends CustomPainter {
   final int count;
   final ValueListenable<double> height;
 
-  SpringPainter({this.count = 20,required this.height}):super(repaint: height);
+  SpringPainter({this.count = 20, required this.height}) : super(repaint: height);
 
   final Paint _paint = Paint()
     ..style = PaintingStyle.stroke
@@ -106,10 +102,10 @@ class SpringPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.translate(size.width / 2+_kSpringWidth / 2, size.height);
+    canvas.translate(size.width / 2 + _kSpringWidth / 2, size.height);
     Path springPath = Path();
     springPath.relativeLineTo(-_kSpringWidth, 0);
-    double space = height.value/(count+1);
+    double space = height.value / (count + 1);
 
     for (int i = 1; i < count; i++) {
       if (i % 2 == 1) {
@@ -119,9 +115,9 @@ class SpringPainter extends CustomPainter {
       }
     }
 
-    if(count.isOdd){
+    if (count.isOdd) {
       springPath.relativeLineTo(_kSpringWidth, 0);
-    }else{
+    } else {
       springPath.relativeLineTo(-_kSpringWidth, 0);
     }
 
@@ -129,6 +125,5 @@ class SpringPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant SpringPainter oldDelegate) =>
-      oldDelegate.count != count || oldDelegate.height != height;
+  bool shouldRepaint(covariant SpringPainter oldDelegate) => oldDelegate.count != count || oldDelegate.height != height;
 }

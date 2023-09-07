@@ -30,16 +30,16 @@ class _DeskCategoryPageState extends State<DeskCategoryPage> {
         children: [
           DeskTabTopBar(onTabPressed: (int value) {
             _ctrl.jumpToPage(value);
-          }, tabs: ['组件酒肆','珍藏组件',
+          }, tabs: ['组件酒肆', '珍藏组件',
             // '添加收藏集'
           ],),
-              Expanded(child: PageView(
-                controller: _ctrl,
-                children: [
-                  DeskCateGoryPage(),
-                  DeskLikePage(),
-                ],
-              ))
+          Expanded(child: PageView(
+            controller: _ctrl,
+            children: [
+              DeskCateGoryPage(),
+              DeskLikePage(),
+            ],
+          ))
         ],
       ),
     );
@@ -59,87 +59,91 @@ class DeskCateGoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    CategoryBloc bloc =  context.read<CategoryBloc>();
+    CategoryBloc bloc = context.read<CategoryBloc>();
     CategoryState state = bloc.state;
-    if(state is CategoryLoadedState){
+    if (state is CategoryLoadedState) {
       return GridView.builder(
-        itemCount: state.categories.length,
+          itemCount: state.categories.length,
           padding: EdgeInsets.all(20),
-          gridDelegate: deskGridDelegate, itemBuilder:  (_, index) => GestureDetector(
-          onTap: () => _toDetailPage(context, state.categories[index]),
-          child: CategoryListItem(
-            data: state.categories[index],
-            onDeleteItemClick: (model) =>
-                _deleteCollect(context, model),
-            onEditItemClick: (model) =>
-                _editCollect(context, model),
-          )));
+          gridDelegate: deskGridDelegate, itemBuilder: (_, index) =>
+          GestureDetector(
+              onTap: () => _toDetailPage(context, state.categories[index]),
+              child: CategoryListItem(
+                data: state.categories[index],
+                onDeleteItemClick: (model) =>
+                    _deleteCollect(context, model),
+                onEditItemClick: (model) =>
+                    _editCollect(context, model),
+              )));
     }
 
     return SizedBox.shrink();
-
   }
 
 
-  ShapeBorder get rRectBorder => const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(10)));
+  ShapeBorder get rRectBorder =>
+      const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)));
 
   void _deleteCollect(BuildContext context, CategoryModel model) {
     showDialog(
         context: context,
-        builder: (ctx) => Dialog(
-          elevation: 5,
-          shape: rRectBorder,
-          child: SizedBox(
-            width: 50,
-            child: DeleteCategoryDialog(
-              title: '删除收藏集',
-              content: '    删除【${model.name}】收藏集，你将会失去其中的所有收藏组件，是否确定继续执行?',
-              onSubmit: () {
-                BlocProvider.of<CategoryBloc>(context)
-                    .add(EventDeleteCategory(id: model.id!));
-                Navigator.of(context).pop();
-              },
-            ),
-          ),
-        ));
+        builder: (ctx) =>
+            Dialog(
+              elevation: 5,
+              shape: rRectBorder,
+              child: SizedBox(
+                width: 50,
+                child: DeleteCategoryDialog(
+                  title: '删除收藏集',
+                  content: '    删除【${model.name}】收藏集，你将会失去其中的所有收藏组件，是否确定继续执行?',
+                  onSubmit: () {
+                    BlocProvider.of<CategoryBloc>(context)
+                        .add(EventDeleteCategory(id: model.id!));
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ));
   }
 
   void _editCollect(BuildContext context, CategoryModel model) {
     showDialog(
         context: context,
-        builder: (ctx) => Dialog(
-          backgroundColor: const Color(0xFFF2F2F2),
-          elevation: 5,
-          shape: rRectBorder,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Gap.H5,
-              Row(
+        builder: (ctx) =>
+            Dialog(
+              backgroundColor: const Color(0xFFF2F2F2),
+              elevation: 5,
+              shape: rRectBorder,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
+                  Gap.H5,
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 10),
+                        child: Circle(
+                          color: Theme
+                              .of(context)
+                              .primaryColor,
+                        ),
+                      ),
+                      const Text(
+                        '修改收藏集',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      const Spacer(),
+                      const CloseButton()
+                    ],
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 10),
-                    child: Circle(
-                      color: Theme.of(context).primaryColor,
-                    ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: EditCategoryPanel(model: model, type: EditType.update,),
                   ),
-                  const Text(
-                    '修改收藏集',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  const Spacer(),
-                  const CloseButton()
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: EditCategoryPanel(model: model,type: EditType.update,),
-              ),
-            ],
-          ),
-        ));
+            ));
   }
 
   void _toDetailPage(BuildContext context, CategoryModel model) {

@@ -1,11 +1,11 @@
 import 'dart:math';
 
-
 class Rnd {
   static int _seed = DateTime.now().millisecondsSinceEpoch;
   static Random random = Random(_seed);
 
   static set seed(int val) => random = Random(_seed = val);
+
   static int get seed => _seed;
 
   /// Gets the next double.
@@ -44,5 +44,4 @@ class Rnd {
   static dynamic getItem(List list) {
     return list[random.nextInt(list.length)];
   }
-
 }

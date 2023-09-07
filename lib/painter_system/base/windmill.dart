@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -10,8 +9,7 @@ class WindmillWidget extends StatefulWidget {
   State<WindmillWidget> createState() => _WindmillWidgetState();
 }
 
-class _WindmillWidgetState extends State<WindmillWidget>
-    with SingleTickerProviderStateMixin {
+class _WindmillWidgetState extends State<WindmillWidget> with SingleTickerProviderStateMixin {
   late final AnimationController _ctrl = AnimationController(
     vsync: this,
     duration: Duration(seconds: (3 * 1.5).toInt()),
@@ -20,8 +18,7 @@ class _WindmillWidgetState extends State<WindmillWidget>
 
   @override
   void initState() {
-    rotate = Tween<double>(begin: 0, end: 3 * 2 * pi)
-        .animate(CurveTween(curve: Curves.easeIn).animate(_ctrl));
+    rotate = Tween<double>(begin: 0, end: 3 * 2 * pi).animate(CurveTween(curve: Curves.easeIn).animate(_ctrl));
     super.initState();
   }
 
@@ -45,12 +42,7 @@ class _WindmillWidgetState extends State<WindmillWidget>
   }
 }
 
-const List<Color> kColors =  [
-  Color(0xffE74437),
-  Color(0xffFBBD19),
-  Color(0xff3482F0),
-  Color(0xff30A04C)
-];
+const List<Color> kColors = [Color(0xffE74437), Color(0xffFBBD19), Color(0xff3482F0), Color(0xff30A04C)];
 
 class WindmillPainter extends CustomPainter {
   final Animation<double> rotate;
@@ -59,7 +51,6 @@ class WindmillPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-
     canvas.translate(size.width / 2, size.height / 2);
     double d = size.width * 0.4;
     canvas.rotate(rotate.value);
@@ -83,7 +74,6 @@ class WindmillPainter extends CustomPainter {
       canvas.rotate(pi / 2);
     }
   }
-
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {

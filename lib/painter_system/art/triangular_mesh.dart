@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../utils/colors.dart';
 
 class Point {
-  double x=0;
-  double y=0;
+  double x = 0;
+  double y = 0;
 }
 
 class TriangularMesh extends StatefulWidget {
@@ -19,10 +19,8 @@ class _TriangularMeshState extends State<TriangularMesh> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        setState(() {
-
-        });
+      onTap: () {
+        setState(() {});
       },
       child: CustomPaint(
         painter: TriangularMeshPainter(),

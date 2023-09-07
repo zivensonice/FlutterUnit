@@ -11,16 +11,10 @@ class Coordinate {
   final Color gridColor;
   final double numScale;
   final bool yTop;
-  final TextPainter _textPainter =
-      TextPainter(textDirection: TextDirection.ltr);
+  final TextPainter _textPainter = TextPainter(textDirection: TextDirection.ltr);
 
   Coordinate(
-      {this.step = 20,
-      this.numScale = 20,
-      this.yTop = false,
-      this.strokeWidth = .5,
-      this.axisColor = Colors.blue,
-      this.gridColor = Colors.grey});
+      {this.step = 20, this.numScale = 20, this.yTop = false, this.strokeWidth = .5, this.axisColor = Colors.blue, this.gridColor = Colors.grey});
 
   final Paint _gridPaint = Paint();
   final Path _gridPath = Path();
@@ -77,18 +71,12 @@ class Coordinate {
     _gridPaint
       ..color = Colors.blue
       ..strokeWidth = 1.5;
-    canvas.drawLine(
-        Offset(-size.width / 2, 0), Offset(size.width / 2, 0), _gridPaint);
-    canvas.drawLine(
-        Offset(0, -size.height / 2), Offset(0, size.height / 2), _gridPaint);
-    canvas.drawLine(Offset(0, size.height / 2),
-        Offset(0 - 7.0, size.height / 2 - 10), _gridPaint);
-    canvas.drawLine(Offset(0, size.height / 2),
-        Offset(0 + 7.0, size.height / 2 - 10), _gridPaint);
-    canvas.drawLine(
-        Offset(size.width / 2, 0), Offset(size.width / 2 - 10, 7), _gridPaint);
-    canvas.drawLine(
-        Offset(size.width / 2, 0), Offset(size.width / 2 - 10, -7), _gridPaint);
+    canvas.drawLine(Offset(-size.width / 2, 0), Offset(size.width / 2, 0), _gridPaint);
+    canvas.drawLine(Offset(0, -size.height / 2), Offset(0, size.height / 2), _gridPaint);
+    canvas.drawLine(Offset(0, size.height / 2), Offset(0 - 7.0, size.height / 2 - 10), _gridPaint);
+    canvas.drawLine(Offset(0, size.height / 2), Offset(0 + 7.0, size.height / 2 - 10), _gridPaint);
+    canvas.drawLine(Offset(size.width / 2, 0), Offset(size.width / 2 - 10, 7), _gridPaint);
+    canvas.drawLine(Offset(size.width / 2, 0), Offset(size.width / 2 - 10, -7), _gridPaint);
   }
 
   void _drawGridLine(Canvas canvas, Size size) {
@@ -119,8 +107,7 @@ class Coordinate {
     canvas.drawPath(_gridPath, _gridPaint);
   }
 
-  void _drawAxisText(Canvas canvas, String str,
-      {Color color = Colors.black, bool? x = false}) {
+  void _drawAxisText(Canvas canvas, String str, {Color color = Colors.black, bool? x = false}) {
     TextSpan text = TextSpan(
         text: str,
         style: TextStyle(
@@ -170,8 +157,7 @@ class Coordinate {
         continue;
       } else {
         var str = (i * step) / numScale;
-        _drawAxisText(canvas, str.toInt().toString(),
-            color: Colors.green, x: true);
+        _drawAxisText(canvas, str.toInt().toString(), color: Colors.green, x: true);
       }
       canvas.translate(step, 0);
     }
@@ -200,8 +186,7 @@ class Coordinate {
         continue;
       } else {
         var str = (-i * step) / numScale;
-        _drawAxisText(canvas, str.toInt().toString(),
-            color: Colors.green, x: true);
+        _drawAxisText(canvas, str.toInt().toString(), color: Colors.green, x: true);
       }
       canvas.translate(-step, 0);
     }

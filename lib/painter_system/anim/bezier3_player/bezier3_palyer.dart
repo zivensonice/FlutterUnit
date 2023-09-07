@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../utils/coordinate.dart';
@@ -34,7 +33,7 @@ class _Bezier3PlayerState extends State<Bezier3Player> {
       child: Container(
         color: Colors.white,
         child: CustomPaint(
-          size: Size(size,size),
+          size: Size(size, size),
           painter: PaperPainter(repaint: touchInfo),
         ),
       ),
@@ -44,33 +43,31 @@ class _Bezier3PlayerState extends State<Bezier3Player> {
   void _onPanDown(DragDownDetails details) {
     if (touchInfo.points.length < 4) {
       touchInfo.addPoint(details.localPosition);
-    }else{
+    } else {
       judgeZone(details.localPosition);
     }
   }
 
-
   void _onPanUpdate(DragUpdateDetails details) {
-    judgeZone(details.localPosition,update: true);
+    judgeZone(details.localPosition, update: true);
   }
 
   ///判断出是否在某点的半径为r圆范围内
-  bool judgeCircleArea(Offset src, Offset dst, double r) =>
-      (src - dst).distance <= r;
+  bool judgeCircleArea(Offset src, Offset dst, double r) => (src - dst).distance <= r;
 
   //判断哪个点被选中
-  void judgeZone(Offset src,{bool update =false}) {
+  void judgeZone(Offset src, {bool update = false}) {
     for (int i = 0; i < touchInfo.points.length; i++) {
       if (judgeCircleArea(src, touchInfo.points[i], 15)) {
         touchInfo.selectIndex = i;
-        if(update){
+        if (update) {
           touchInfo.updatePoint(i, src);
         }
       }
     }
   }
 
-  void _clear () {
+  void _clear() {
     touchInfo.reset();
   }
 }
@@ -86,16 +83,14 @@ class PaperPainter extends CustomPainter {
   final TouchInfo repaint;
 
   PaperPainter({required this.repaint}) : super(repaint: repaint);
-  List<Offset> pos=[];
+  List<Offset> pos = [];
 
   @override
   void paint(Canvas canvas, Size size) {
     coordinate.paint(canvas, size);
     canvas.translate(size.width / 2, size.height / 2);
 
-    pos = repaint.points
-        .map((e) => e.translate(-size.width / 2, -size.height / 2))
-        .toList();
+    pos = repaint.points.map((e) => e.translate(-size.width / 2, -size.height / 2)).toList();
 
     Path path = Path();
     Paint paint = Paint()
@@ -109,7 +104,7 @@ class PaperPainter extends CustomPainter {
       path.cubicTo(pos[1].dx, pos[1].dy, pos[2].dx, pos[2].dy, pos[3].dx, pos[3].dy);
       canvas.drawPath(path, paint);
       _drawHelp(canvas);
-      _drawSelectPos(canvas,size);
+      _drawSelectPos(canvas, size);
     }
   }
 
@@ -119,10 +114,10 @@ class PaperPainter extends CustomPainter {
     canvas.drawPoints(PointMode.points, pos, _helpPaint..strokeWidth = 8);
   }
 
-  void _drawSelectPos(Canvas canvas,Size size) {
+  void _drawSelectPos(Canvas canvas, Size size) {
     Offset? selectPos = repaint.selectPoint;
     if (selectPos == null) return;
-      selectPos = selectPos.translate(-size.width / 2, -size.height / 2);
+    selectPos = selectPos.translate(-size.width / 2, -size.height / 2);
     canvas.drawCircle(
         selectPos,
         10,
@@ -132,6 +127,5 @@ class PaperPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(PaperPainter oldDelegate) =>
-      oldDelegate.repaint != repaint;
+  bool shouldRepaint(PaperPainter oldDelegate) => oldDelegate.repaint != repaint;
 }

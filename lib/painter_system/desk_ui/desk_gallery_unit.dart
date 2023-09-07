@@ -35,7 +35,7 @@ class _DeskGalleryUnitState extends State<DeskGalleryUnit> {
 
   Color get color => Colors.blue;
 
-  Color get nextColor =>Colors.orangeAccent;
+  Color get nextColor => Colors.orangeAccent;
 
   BoxDecoration get boxDecoration => const BoxDecoration(
         color: Colors.white,
@@ -63,8 +63,7 @@ class _DeskGalleryUnitState extends State<DeskGalleryUnit> {
   }
 
   Widget _buildContent() {
-    final List<Widget> widgets =
-        (json.decode(StrUnit.galleryInfo) as List).map((e) {
+    final List<Widget> widgets = (json.decode(StrUnit.galleryInfo) as List).map((e) {
       GalleryInfo info = GalleryInfo.fromJson(e);
       List<Widget> children = GalleryFactory.getGalleryByName(info.type);
 
@@ -84,8 +83,7 @@ class _DeskGalleryUnitState extends State<DeskGalleryUnit> {
       );
     }).toList();
 
-    SliverGridDelegate gridDelegate =
-    const SliverGridDelegateWithMaxCrossAxisExtent(
+    SliverGridDelegate gridDelegate = const SliverGridDelegateWithMaxCrossAxisExtent(
       maxCrossAxisExtent: 460,
       mainAxisSpacing: 10,
       mainAxisExtent: 360,

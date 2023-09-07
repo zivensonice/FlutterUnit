@@ -14,12 +14,7 @@ class PictureFrame extends StatelessWidget {
   final Alignment? alignment;
   final EdgeInsetsGeometry? marge;
 
-  const PictureFrame({Key? key, this.child,
-    this.width,
-    this.height,
-    this.alignment,
-    this.color = Colors.transparent,
-    this.marge}) : super(key: key);
+  const PictureFrame({Key? key, this.child, this.width, this.height, this.alignment, this.color = Colors.transparent, this.marge}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,14 +46,15 @@ class FramePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Path path = Path()
-      ..relativeLineTo(0, size.height)..relativeLineTo(size.width, 0)..relativeLineTo(0, -size.height)
+      ..relativeLineTo(0, size.height)
+      ..relativeLineTo(size.width, 0)
+      ..relativeLineTo(0, -size.height)
       ..close();
     Paint myPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 10;
     canvas.drawPath(path, myPaint);
-    Path shadowPath = Path()
-      ..addRect(Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
+    Path shadowPath = Path()..addRect(Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
     // canvas.drawShadow(shadowPath, Colors.grey, 1, false);
 
     canvas.save();
@@ -114,24 +110,13 @@ class FrameShower extends StatelessWidget {
   final String info;
   final Widget content;
 
-  const FrameShower({Key? key,
-    this.title = "",
-    this.author = "",
-    this.srcUrl = "",
-    this.info = "",
-    required this.content})
-      : super(key: key);
+  const FrameShower({Key? key, this.title = "", this.author = "", this.srcUrl = "", this.info = "", required this.content}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     bool isDesk = Platform.isMacOS || Platform.isWindows || Platform.isLinux;
     if (isDesk) {
-      return DeskFrameShower(
-          content: content,
-          title: title,
-          author: author,
-          srcUrl: srcUrl,
-          info: info);
+      return DeskFrameShower(content: content, title: title, author: author, srcUrl: srcUrl, info: info);
     }
 
     return Align(
@@ -143,7 +128,10 @@ class FrameShower extends StatelessWidget {
             title,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          PictureFrame(child: content,color: Colors.white,),
+          PictureFrame(
+            child: content,
+            color: Colors.white,
+          ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
@@ -157,10 +145,7 @@ class FrameShower extends StatelessWidget {
                   onTap: _launch,
                   child: const Text(
                     "源码地址    ",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.blueAccent),
                   ),
                 ),
               ],
@@ -172,10 +157,7 @@ class FrameShower extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Text(
                 info,
-                style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 14, color: Colors.grey, fontWeight: FontWeight.bold),
               )),
         ],
       ),
@@ -186,8 +168,6 @@ class FrameShower extends StatelessWidget {
     String url = 'https://github.com/toly1994328/FlutterUnit/tree/master/lib/painter_system$srcUrl';
     if (await canLaunch(url)) {
       await launch(url);
-    } else {
-
-    }
+    } else {}
   }
 }

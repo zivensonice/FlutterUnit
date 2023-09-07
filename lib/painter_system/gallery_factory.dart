@@ -67,16 +67,10 @@ class GalleryFactory {
               title: "平面直角坐标系",
               author: "张风捷特烈",
               srcUrl: "/base/draw_grid_axis.dart",
-              info:
-                  "本样例介绍如何使用线路径和文字绘制网格坐标系，并将绘制对象进行封装，方便重用。坐标系也会在绘制时提供参考，入门必备。",
+              info: "本样例介绍如何使用线路径和文字绘制网格坐标系，并将绘制对象进行封装，方便重用。坐标系也会在绘制时提供参考，入门必备。",
               content: DrawGridAxis()),
           FrameShower(
-              title: "平面极坐标系",
-              author: "张风捷特烈",
-              srcUrl: "/base/polar",
-              info:
-              "本样例介绍如何使用绘制平面的极坐标系，并根据函数方程收集极坐标进行绘制。",
-              content: PolarPainterWidget()),
+              title: "平面极坐标系", author: "张风捷特烈", srcUrl: "/base/polar", info: "本样例介绍如何使用绘制平面的极坐标系，并根据函数方程收集极坐标进行绘制。", content: PolarPainterWidget()),
           FrameShower(
               title: "曲线拟合",
               author: "张风捷特烈",
@@ -122,12 +116,7 @@ class GalleryFactory {
               srcUrl: '/anim/circle_halo.dart',
               info: "本样例介绍如何在绘制中使用着色器和过滤器，并通过动画进行数值变化达到旋转流光效果。",
               content: CircleHalo()),
-          FrameShower(
-              title: "曲线路径动画",
-              author: "张风捷特烈",
-              srcUrl: '/anim/draw_path.dart',
-              info: "本样例介绍如何使用路径绘制函数曲线，并使用路径测量进行动画",
-              content: DrawPath()),
+          FrameShower(title: "曲线路径动画", author: "张风捷特烈", srcUrl: '/anim/draw_path.dart', info: "本样例介绍如何使用路径绘制函数曲线，并使用路径测量进行动画", content: DrawPath()),
           FrameShower(
               title: "冰墩墩线条动画",
               author: "张风捷特烈",
@@ -146,7 +135,6 @@ class GalleryFactory {
               srcUrl: '/anim/curve_shower',
               info: "本样例通过直观的方式，来查看动画曲线 curve 的作用效果，让大家对动画有更深的理解。\n特殊操作：点击运行",
               content: CurveAnimShower()),
-
         ];
       case GalleryType.particle:
         return const [
@@ -170,12 +158,12 @@ class GalleryFactory {
               content: SplitImage()),
         ];
       case GalleryType.fun:
-        return const[
-           FrameShower(
+        return const [
+          FrameShower(
               title: "Random Portrait",
               author: "张风捷特烈",
-               srcUrl: '/fun/random_portrait.dart',
-               info: "本样例介绍绘制矩形及随机数处理。通过点位集合确定矩形位置信息，将其绘制出来。可以练习对数据的控制能力。\n特殊操作：点击随机生成",
+              srcUrl: '/fun/random_portrait.dart',
+              info: "本样例介绍绘制矩形及随机数处理。通过点位集合确定矩形位置信息，将其绘制出来。可以练习对数据的控制能力。\n特殊操作：点击随机生成",
               content: RandomPortrait()),
           FrameShower(
               title: "冰墩墩",
@@ -202,64 +190,56 @@ class GalleryFactory {
             title: "Tiled Line",
             author: "generativeartistry.com",
             srcUrl: '/art/tiled_lines.dart',
-            info:
-                "本样例根源来自generativeartistry.com的tiled-lines,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
+            info: "本样例根源来自generativeartistry.com的tiled-lines,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
             content: TiledLines(),
           ),
           FrameShower(
             title: "Joy Division",
             author: "generativeartistry.com",
             srcUrl: '/art/joy_division.dart',
-            info:
-                "本样例根源来自generativeartistry.com的joy-division,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
+            info: "本样例根源来自generativeartistry.com的joy-division,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
             content: JoyDivision(),
           ),
           FrameShower(
             title: "Cubic Disarray",
             author: "generativeartistry.com",
             srcUrl: '/art/cubic_disarray.dart',
-            info:
-                "本样例根源来自generativeartistry.com的cubic-disarray,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
+            info: "本样例根源来自generativeartistry.com的cubic-disarray,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
             content: CubicDisarray(),
           ),
           FrameShower(
             title: "Triangular Mesh",
             author: "generativeartistry.com",
             srcUrl: '/art/triangular_mesh.dart',
-            info:
-                "本样例根源来自generativeartistry.com的triangular-mesh,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
+            info: "本样例根源来自generativeartistry.com的triangular-mesh,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
             content: TriangularMesh(),
           ),
           FrameShower(
             title: "Un Deux Trois",
             srcUrl: '/art/un_deux_trois.dart',
             author: "generativeartistry.com",
-            info:
-                "本样例根源来自generativeartistry.com的un-deux-trois,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
+            info: "本样例根源来自generativeartistry.com的un-deux-trois,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
             content: UnDeuxTrois(),
           ),
           FrameShower(
             title: "Circle Packing",
             author: "generativeartistry.com",
             srcUrl: '/art/circle_packing.dart',
-            info:
-                "本样例根源来自generativeartistry.com的circle-packing,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
+            info: "本样例根源来自generativeartistry.com的circle-packing,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
             content: CirclePacking(),
           ),
           FrameShower(
             title: "Hypnotic Squares",
             author: "generativeartistry.com",
             srcUrl: '/art/hypnotic_squares.dart',
-            info:
-                "本样例根源来自generativeartistry.com的hypnotic-squares,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
+            info: "本样例根源来自generativeartistry.com的hypnotic-squares,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
             content: HypnoticSquares(),
           ),
           FrameShower(
             title: "Piet Mondrian",
             author: "generativeartistry.com",
             srcUrl: '/art/piet_mondrian.dart',
-            info:
-                "本样例根源来自generativeartistry.com的piet-mondrian,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
+            info: "本样例根源来自generativeartistry.com的piet-mondrian,由xrr2016使用Flutter实现。仓库地址:flutter-generative-artistry",
             content: PietMondrian(),
           )
         ];

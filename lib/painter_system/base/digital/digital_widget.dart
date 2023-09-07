@@ -10,12 +10,7 @@ class SingleDigitalWidget extends StatelessWidget {
   final int value;
   final DigitalPath digitalPath;
 
-  SingleDigitalWidget(
-      {Key? key,
-      required this.width,
-      required this.value,
-      DigitalPath? digitalPath,
-      this.color = Colors.black})
+  SingleDigitalWidget({Key? key, required this.width, required this.value, DigitalPath? digitalPath, this.color = Colors.black})
       : digitalPath = digitalPath ?? DigitalPath(),
         super(key: key);
 
@@ -64,19 +59,17 @@ class MultiDigitalWidget extends StatelessWidget {
     return Wrap(
       spacing: spacing,
       runSpacing: runSpacing,
-      children: List.generate(
-          count,
-          (index) {
-            if(index<colors.length){
-              color = colors[index];
-            }
-            return SingleDigitalWidget(
-                width: width,
-                color: color,
-                value: int.parse(numStr[index]),
-                digitalPath: digitalPath,
-              );
-          }),
+      children: List.generate(count, (index) {
+        if (index < colors.length) {
+          color = colors[index];
+        }
+        return SingleDigitalWidget(
+          width: width,
+          color: color,
+          value: int.parse(numStr[index]),
+          digitalPath: digitalPath,
+        );
+      }),
     );
   }
 }

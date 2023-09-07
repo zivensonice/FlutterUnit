@@ -32,7 +32,7 @@ class PaperPainter extends CustomPainter {
   final double step = 6;
   final double min = -240;
   final double max = 240;
-  final List<Color> colors = const[
+  final List<Color> colors = const [
     Color(0xFFF60C0C),
     Color(0xFFF3B913),
     Color(0xFFE7F716),
@@ -59,8 +59,7 @@ class PaperPainter extends CustomPainter {
   }
 
   double f(double thta) {
-    double p =
-        40 * (pow(e, cos(thta)) - 2 * cos(4 * thta) + pow(sin(thta / 12), 5));
+    double p = 40 * (pow(e, cos(thta)) - 2 * cos(4 * thta) + pow(sin(thta / 12), 5));
     return p;
   }
 
@@ -75,8 +74,7 @@ class PaperPainter extends CustomPainter {
 
     var pos = [1.0 / 7, 2.0 / 7, 3.0 / 7, 4.0 / 7, 5.0 / 7, 6.0 / 7, 1.0];
 
-    paint.shader = ui.Gradient.linear(
-        const Offset(0, 0), const Offset(100, 0), colors, pos, TileMode.mirror);
+    paint.shader = ui.Gradient.linear(const Offset(0, 0), const Offset(100, 0), colors, pos, TileMode.mirror);
 
     Offset p1 = points[0];
     Path path = Path()..moveTo(p1.dx, p1.dy);

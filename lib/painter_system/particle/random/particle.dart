@@ -19,7 +19,6 @@ class Particle {
   ///粒子竖直速度.
   double vy;
 
-
   /// 粒子大小.
   double size;
 

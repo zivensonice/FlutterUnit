@@ -10,8 +10,7 @@ class CircleHalo extends StatefulWidget {
   _CircleHaloState createState() => _CircleHaloState();
 }
 
-class _CircleHaloState extends State<CircleHalo>
-    with SingleTickerProviderStateMixin {
+class _CircleHaloState extends State<CircleHalo> with SingleTickerProviderStateMixin {
   late AnimationController _ctrl;
 
   @override
@@ -22,7 +21,6 @@ class _CircleHaloState extends State<CircleHalo>
       duration: const Duration(seconds: 2),
     );
     _ctrl.repeat();
-
   }
 
   @override
@@ -33,10 +31,10 @@ class _CircleHaloState extends State<CircleHalo>
 
   @override
   Widget build(BuildContext context) {
-    return  CustomPaint(
-        size: const Size(200, 200),
-        painter: CircleHaloPainter(_ctrl),
-      );
+    return CustomPaint(
+      size: const Size(200, 200),
+      painter: CircleHaloPainter(_ctrl),
+    );
   }
 }
 
@@ -45,8 +43,7 @@ class CircleHaloPainter extends CustomPainter {
 
   CircleHaloPainter(this.animation) : super(repaint: animation);
 
-  final Animatable<double> rotateTween = Tween<double>(begin: 0, end: 2 * pi)
-      .chain(CurveTween(curve: Curves.easeIn));
+  final Animatable<double> rotateTween = Tween<double>(begin: 0, end: 2 * pi).chain(CurveTween(curve: Curves.easeIn));
 
   final Animatable<double> breatheTween = TweenSequence<double>(
     <TweenSequenceItem<double>>[
@@ -68,13 +65,9 @@ class CircleHaloPainter extends CustomPainter {
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke;
 
-    Path circlePath = Path()
-      ..addOval(Rect.fromCenter(center: const Offset(0, 0), width: 100, height: 100));
-    Path circlePath2 = Path()
-      ..addOval(
-          Rect.fromCenter(center: const Offset(-1, 0), width: 100, height: 100));
-    Path result =
-        Path.combine(PathOperation.difference, circlePath, circlePath2);
+    Path circlePath = Path()..addOval(Rect.fromCenter(center: const Offset(0, 0), width: 100, height: 100));
+    Path circlePath2 = Path()..addOval(Rect.fromCenter(center: const Offset(-1, 0), width: 100, height: 100));
+    Path result = Path.combine(PathOperation.difference, circlePath, circlePath2);
 
     List<Color> colors = [
       const Color(0xFFF60C0C),
@@ -86,14 +79,11 @@ class CircleHaloPainter extends CustomPainter {
       const Color(0xFFB709F4),
     ];
     colors.addAll(colors.reversed.toList());
-    final List<double> pos =
-        List.generate(colors.length, (index) => index / colors.length);
+    final List<double> pos = List.generate(colors.length, (index) => index / colors.length);
 
-    paint.shader =
-        ui.Gradient.sweep(Offset.zero, colors, pos, TileMode.clamp, 0, 2 * pi);
+    paint.shader = ui.Gradient.sweep(Offset.zero, colors, pos, TileMode.clamp, 0, 2 * pi);
 
-    paint.maskFilter =
-        MaskFilter.blur(BlurStyle.solid, breatheTween.evaluate(animation));
+    paint.maskFilter = MaskFilter.blur(BlurStyle.solid, breatheTween.evaluate(animation));
     canvas.drawPath(circlePath, paint);
 
     canvas.save();
@@ -101,12 +91,11 @@ class CircleHaloPainter extends CustomPainter {
     paint
       ..style = PaintingStyle.fill
       ..color = const Color(0xff00abf2);
-    paint.shader=null;
+    paint.shader = null;
     canvas.drawPath(result, paint);
     canvas.restore();
   }
 
   @override
-  bool shouldRepaint(covariant CircleHaloPainter oldDelegate) =>
-      oldDelegate.animation != animation;
+  bool shouldRepaint(covariant CircleHaloPainter oldDelegate) => oldDelegate.animation != animation;
 }

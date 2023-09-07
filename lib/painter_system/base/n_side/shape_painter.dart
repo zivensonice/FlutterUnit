@@ -27,7 +27,10 @@ class ShapePainter extends CustomPainter {
     _drawShapeHelper(canvas, points, radius);
   }
 
-  final Paint shapePaint = Paint()..style = PaintingStyle.stroke..color=Colors.blue..strokeWidth=2;
+  final Paint shapePaint = Paint()
+    ..style = PaintingStyle.stroke
+    ..color = Colors.blue
+    ..strokeWidth = 2;
 
   void _drawShape(Canvas canvas, List<Offset> points) {
     Path shapePath = Path();
@@ -40,9 +43,7 @@ class ShapePainter extends CustomPainter {
   }
 
   void _drawShapeHelper(Canvas canvas, List<Offset> points, double radius) {
-    Path helpPath = Path()
-      ..addOval(Rect.fromCenter(
-          center: Offset.zero, width: radius * 2, height: radius * 2));
+    Path helpPath = Path()..addOval(Rect.fromCenter(center: Offset.zero, width: radius * 2, height: radius * 2));
     dashPainter.paint(canvas, helpPath, helpPaint);
     for (Offset point in points) {
       drawAnchor(canvas, point);
@@ -113,7 +114,7 @@ class ShapePainter extends CustomPainter {
   }) {
     textPainter.text = TextSpan(
       text: text,
-      style: TextStyle(fontSize: 11, color: color,fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.bold),
     );
     textPainter.layout(maxWidth: 200);
     textPainter.paint(canvas, offset);

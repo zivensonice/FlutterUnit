@@ -11,8 +11,7 @@ class StampPaper extends StatefulWidget {
   _StampPaperState createState() => _StampPaperState();
 }
 
-class _StampPaperState extends State<StampPaper>
-    with SingleTickerProviderStateMixin {
+class _StampPaperState extends State<StampPaper> with SingleTickerProviderStateMixin {
   final StampData stamps = StampData();
   int gridCount = 3;
   double radius = 0;
@@ -28,8 +27,7 @@ class _StampPaperState extends State<StampPaper>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: animDuration)
-      ..addListener(_listenAnim);
+    _controller = AnimationController(vsync: this, duration: animDuration)..addListener(_listenAnim);
   }
 
   void _listenAnim() {
@@ -69,16 +67,14 @@ class _StampPaperState extends State<StampPaper>
     }
 
     radius = width / 2 / gridCount * 0.618;
-    stamps.push(Stamp(
-        radius: radius, center: details.localPosition, color: Colors.grey));
+    stamps.push(Stamp(radius: radius, center: details.localPosition, color: Colors.grey));
   }
 
   int containsIndex = -1;
 
   int checkZone(Offset src) {
     for (int i = 0; i < stamps.stamps.length; i++) {
-      Rect zone = Rect.fromCircle(
-          center: stamps.stamps[i].center, radius: width / gridCount / 2);
+      Rect zone = Rect.fromCircle(center: stamps.stamps[i].center, radius: width / gridCount / 2);
       if (zone.contains(src)) {
         return i;
       }
@@ -89,8 +85,7 @@ class _StampPaperState extends State<StampPaper>
   void _onTapUp(TapUpDetails details) {
     if (contains || gameOver) return;
 
-    stamps.activeLast(
-        color: stamps.stamps.length % 2 == 0 ? Colors.red : Colors.blue);
+    stamps.activeLast(color: stamps.stamps.length % 2 == 0 ? Colors.red : Colors.blue);
 
     gameState = stamps.checkWin(width / gridCount);
     if (gameState == GameState.redWin) {
@@ -101,14 +96,13 @@ class _StampPaperState extends State<StampPaper>
     }
 
     if (gameState == GameState.blueWin) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("蓝棋获胜!"), backgroundColor: Colors.blue));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("蓝棋获胜!"), backgroundColor: Colors.blue));
     }
   }
 
   void _clear() {
     stamps.clear();
-    gameState=GameState.doing;
+    gameState = GameState.doing;
   }
 
   void _removeLast() {
@@ -143,28 +137,14 @@ class BackGroundPainter extends CustomPainter {
     Color(0xFFB709F4),
   ];
 
-  static const List<double> pos = [
-    1.0 / 7,
-    2.0 / 7,
-    3.0 / 7,
-    4.0 / 7,
-    5.0 / 7,
-    6.0 / 7,
-    1.0
-  ];
+  static const List<double> pos = [1.0 / 7, 2.0 / 7, 3.0 / 7, 4.0 / 7, 5.0 / 7, 6.0 / 7, 1.0];
 
   @override
   void paint(Canvas canvas, Size size) {
     Rect zone = Offset.zero & size;
     canvas.clipRect(zone);
 
-    _pathPaint.shader = ui.Gradient.sweep(
-        Offset(size.width / 2, size.height / 2),
-        colors,
-        pos,
-        TileMode.mirror,
-        pi / 2,
-        pi);
+    _pathPaint.shader = ui.Gradient.sweep(Offset(size.width / 2, size.height / 2), colors, pos, TileMode.mirror, pi / 2, pi);
 
     canvas.save();
     for (int i = 0; i < count - 1; i++) {
@@ -210,15 +190,13 @@ class StampPainter extends CustomPainter {
 
       Offset center = Offset(length * x + length / 2, length * y + length / 2);
       stamp.center = center;
-      canvas.drawCircle(
-          stamp.center, stamp.radius, _paint..color = stamp.color);
+      canvas.drawCircle(stamp.center, stamp.radius, _paint..color = stamp.color);
       canvas.drawPath(
           stamp.path,
           _pathPaint
             ..strokeWidth = strokeWidth
             ..color = Colors.white);
-      canvas.drawCircle(stamp.center, stamp.radius + strokeWidth * 1.5,
-          _pathPaint..color = stamp.color);
+      canvas.drawCircle(stamp.center, stamp.radius + strokeWidth * 1.5, _pathPaint..color = stamp.color);
     }
   }
 

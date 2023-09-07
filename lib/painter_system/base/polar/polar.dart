@@ -8,10 +8,10 @@ class Polar2D {
 
   final Offset coo;
 
-  Polar2D(this.rad, this.length,{this.coo=Offset.zero});
+  Polar2D(this.rad, this.length, {this.coo = Offset.zero});
 
   Offset get offset => Offset(
-        cos(rad) * length-coo.dx,
-        sin(rad) * length-coo.dy,
+        cos(rad) * length - coo.dx,
+        sin(rad) * length - coo.dy,
       );
 }

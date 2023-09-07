@@ -8,7 +8,6 @@ import 'particle_manage.dart';
 /// 说明:
 
 class WorldRender extends CustomPainter {
-
   final ParticleManage manage;
 
   Paint fillPaint = Paint();
@@ -32,6 +31,5 @@ class WorldRender extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant WorldRender oldDelegate) =>
-      oldDelegate.manage != manage;
+  bool shouldRepaint(covariant WorldRender oldDelegate) => oldDelegate.manage != manage;
 }

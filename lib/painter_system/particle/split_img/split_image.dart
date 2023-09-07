@@ -25,11 +25,9 @@ class _SplitImageState extends State<SplitImage> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    pm = ParticleManage(
-      onEnd: (){
-        _controller.stop();
-      }
-    );
+    pm = ParticleManage(onEnd: () {
+      _controller.stop();
+    });
 
     initParticles();
 
@@ -45,16 +43,15 @@ class _SplitImageState extends State<SplitImage> with SingleTickerProviderStateM
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (_,constraints){
+      builder: (_, constraints) {
         pm.size = constraints.biggest;
         return Stack(
           children: [
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 initParticles();
                 _controller.reset();
                 _controller.repeat();
@@ -68,7 +65,6 @@ class _SplitImageState extends State<SplitImage> with SingleTickerProviderStateM
         );
       },
     );
-
   }
 
   void initParticles() async {
@@ -77,20 +73,20 @@ class _SplitImageState extends State<SplitImage> with SingleTickerProviderStateM
     List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     image.Image? imageSrc = image.decodeImage(bytes);
 
-    if(imageSrc==null) return;
+    if (imageSrc == null) return;
 
-    double offsetX=  (pm.size.width-imageSrc.width)/2;
-    double offsetY=  (pm.size.height-imageSrc.height)/2;
+    double offsetX = (pm.size.width - imageSrc.width) / 2;
+    double offsetY = (pm.size.height - imageSrc.height) / 2;
 
     for (int i = 0; i < imageSrc.width; i++) {
       for (int j = 0; j < imageSrc.height; j++) {
         if (imageSrc.getPixel(i, j) == 0xff000000) {
           Particle particle = Particle(
-              x: i * 1.0+ offsetX,
-              y: j * 1.0+ offsetY,
-                  vx: 4 * random.nextDouble() * pow(-1, random.nextInt(20)),
-                  vy: 4 * random.nextDouble() * pow(-1, random.nextInt(20)),
-                  ay: 0.1,
+              x: i * 1.0 + offsetX,
+              y: j * 1.0 + offsetY,
+              vx: 4 * random.nextDouble() * pow(-1, random.nextInt(20)),
+              vy: 4 * random.nextDouble() * pow(-1, random.nextInt(20)),
+              ay: 0.1,
               size: 0.5,
               color: Colors.blue); //产生粒子---每个粒子拥有随机的一些属性信息
           pm.particles.add(particle);

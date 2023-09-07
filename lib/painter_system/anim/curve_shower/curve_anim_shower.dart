@@ -11,8 +11,7 @@ class CurveAnimShower extends StatefulWidget {
   _CurveAnimShowerState createState() => _CurveAnimShowerState();
 }
 
-class _CurveAnimShowerState extends State<CurveAnimShower>
-    with SingleTickerProviderStateMixin {
+class _CurveAnimShowerState extends State<CurveAnimShower> with SingleTickerProviderStateMixin {
   PointData points = PointData();
 
   late AnimationController _ctrl;
@@ -109,8 +108,7 @@ class _CurveAnimShowerState extends State<CurveAnimShower>
                 width: 180,
                 disableColor: const Color(0xff1F425F),
                 onDropSelected: (int index) async {
-                  curveAnim = CurvedAnimation(
-                      parent: _ctrl, curve: maps.values.toList()[index]);
+                  curveAnim = CurvedAnimation(parent: _ctrl, curve: maps.values.toList()[index]);
                   _startAnim();
                 },
               )),

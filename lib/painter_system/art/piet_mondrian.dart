@@ -15,10 +15,8 @@ class _PietMondrianState extends State<PietMondrian> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        setState(() {
-
-        });
+      onTap: () {
+        setState(() {});
       },
       child: CustomPaint(
         painter: PietMondrianPainnter(),
@@ -35,11 +33,11 @@ class Square {
   final Color color;
 
   Square({
-   required this.x,
-   required this.y,
-   required this.width,
-   required this.height,
-   required this.color,
+    required this.x,
+    required this.y,
+    required this.width,
+    required this.height,
+    required this.color,
   });
 
   Map toJson() {
@@ -87,8 +85,8 @@ class PietMondrianPainnter extends CustomPainter {
   }
 
   void _splitSquaresWith(Map coordinates, List<Square> squares) {
-    final double x = coordinates["x"]??0;
-    final double y = coordinates["y"]??0;
+    final double x = coordinates["x"] ?? 0;
+    final double y = coordinates["y"] ?? 0;
 
     for (int i = squares.length - 1; i >= 0; i--) {
       final Square square = squares[i];
@@ -174,5 +172,4 @@ class PietMondrianPainnter extends CustomPainter {
 
   @override
   bool shouldRepaint(PietMondrianPainnter oldDelegate) => true;
-
 }

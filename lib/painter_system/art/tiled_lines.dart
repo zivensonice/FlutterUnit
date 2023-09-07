@@ -12,10 +12,8 @@ class _TiledLinesState extends State<TiledLines> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        setState(() {
-
-        });
+      onTap: () {
+        setState(() {});
       },
       child: CustomPaint(
         painter: TiledLinesPainter(20),
@@ -58,7 +56,7 @@ class TiledLinesPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.clipRect(Rect.fromPoints(Offset.zero, Offset(size.width,size.height)));
+    canvas.clipRect(Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
     for (double x = 0; x < size.width; x += step) {
       for (double y = 0; y < size.height; y += step) {
         _drawLine(canvas, x, y, step, step);

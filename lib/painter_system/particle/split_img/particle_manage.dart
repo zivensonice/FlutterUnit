@@ -15,7 +15,7 @@ class ParticleManage with ChangeNotifier {
 
   Size size;
 
-  ParticleManage({this.size=Size.zero,this.onEnd});
+  ParticleManage({this.size = Size.zero, this.onEnd});
 
   void setParticles(List<Particle> particles) {
     this.particles = particles;
@@ -26,13 +26,13 @@ class ParticleManage with ChangeNotifier {
     notifyListeners();
   }
 
-  void tick({bool run=true}) {
-    if(run){
+  void tick({bool run = true}) {
+    if (run) {
       for (int i = 0; i < particles.length; i++) {
         doUpdate(particles[i]);
       }
     }
-    if(particles.isNotEmpty){
+    if (particles.isNotEmpty) {
       notifyListeners();
     }
   }
@@ -57,7 +57,7 @@ class ParticleManage with ChangeNotifier {
     if (p.y < 0) {
       particles.remove(p);
     }
-    if(particles.isEmpty){
+    if (particles.isEmpty) {
       onEnd?.call();
     }
   }

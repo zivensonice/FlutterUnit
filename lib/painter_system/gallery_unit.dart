@@ -22,8 +22,8 @@ class GalleryUnit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (_,c){
-      if(c.maxWidth>500){
+    return LayoutBuilder(builder: (_, c) {
+      if (c.maxWidth > 500) {
         return const DeskGalleryUnit();
       }
       return const PhoneGalleryUnit();
@@ -41,7 +41,7 @@ class PhoneGalleryUnit extends StatefulWidget {
 class _PhoneGalleryUnitState extends State<PhoneGalleryUnit> {
   final ValueNotifier<double> factor = ValueNotifier<double>(0);
 
- late PageController _ctrl;
+  late PageController _ctrl;
 
   final int _firstOffset = 1000; //初始偏移
   int _position = 0; //页面位置
@@ -57,10 +57,10 @@ class _PhoneGalleryUnitState extends State<PhoneGalleryUnit> {
       viewportFraction: 0.9,
       initialPage: _position,
     )..addListener(() {
-      if(_ctrl.page!=null){
-        double value = (_ctrl.page! - _firstOffset + 1) % 5 / 5;
-        factor.value = value == 0 ? 1 : value;
-      }
+        if (_ctrl.page != null) {
+          double value = (_ctrl.page! - _firstOffset + 1) % 5 / 5;
+          factor.value = value == 0 ? 1 : value;
+        }
       });
   }
 
@@ -71,33 +71,30 @@ class _PhoneGalleryUnitState extends State<PhoneGalleryUnit> {
     super.dispose();
   }
 
-
   Color get color => Colors.blue;
 
-  Color get nextColor =>Colors.orangeAccent;
+  Color get nextColor => Colors.orangeAccent;
+
   bool get isDark => Theme.of(context).brightness == Brightness.dark;
 
-  BoxDecoration get boxDecoration =>  BoxDecoration(
-        color: isDark?Colors.white.withAlpha(33):Colors.white,
-        borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+  BoxDecoration get boxDecoration => BoxDecoration(
+        color: isDark ? Colors.white.withAlpha(33) : Colors.white,
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40)),
       );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value:const SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.light
-        ),
-        child:ValueListenableBuilder(
+        value: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
+        child: ValueListenableBuilder(
           child: Column(
             children: [
               _buildTitle(context),
               Expanded(
                   child: Container(
                 margin: const EdgeInsets.only(left: 8, right: 8),
-                child: BlocBuilder<GalleryUnitBloc,String>(
+                child: BlocBuilder<GalleryUnitBloc, String>(
                   builder: _buildContentByState,
                 ),
                 decoration: boxDecoration,
@@ -105,12 +102,14 @@ class _PhoneGalleryUnitState extends State<PhoneGalleryUnit> {
             ],
           ),
           valueListenable: factor,
-          builder: (_,double value, child) => Container(
-            color: isDark?null:Color.lerp(
-              color,
-              nextColor,
-              value,
-            ),
+          builder: (_, double value, child) => Container(
+            color: isDark
+                ? null
+                : Color.lerp(
+                    color,
+                    nextColor,
+                    value,
+                  ),
             child: child,
           ),
         ),
@@ -125,7 +124,7 @@ class _PhoneGalleryUnitState extends State<PhoneGalleryUnit> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: const [
-           FlutterLogo(
+          FlutterLogo(
             size: 40,
           ),
           SizedBox(
@@ -141,7 +140,7 @@ class _PhoneGalleryUnitState extends State<PhoneGalleryUnit> {
   }
 
   Widget _buildContentByState(BuildContext context, String state) {
-    if(state.isEmpty){
+    if (state.isEmpty) {
       return const LoadingShower();
     }
     return _buildContent(state);
@@ -179,12 +178,10 @@ class _PhoneGalleryUnitState extends State<PhoneGalleryUnit> {
                   return AnimatedBuilder(
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
-                      child: widgets[
-                          _fixPosition(index, _firstOffset, widgets.length)],
+                      child: widgets[_fixPosition(index, _firstOffset, widgets.length)],
                     ),
                     animation: _ctrl,
-                    builder: (context, child) =>
-                        _buildAnimItemByIndex(context, child, index),
+                    builder: (context, child) => _buildAnimItemByIndex(context, child, index),
                   );
                 },
                 onPageChanged: (index) {
@@ -199,7 +196,7 @@ class _PhoneGalleryUnitState extends State<PhoneGalleryUnit> {
 
   Widget _buildAnimItemByIndex(BuildContext context, Widget? child, int index) {
     double value;
-    if (_ctrl.position.haveDimensions&&_ctrl.page!=null) {
+    if (_ctrl.position.haveDimensions && _ctrl.page != null) {
       value = _ctrl.page! - index;
     } else {
       value = (_position - index).toDouble();
@@ -218,7 +215,7 @@ class _PhoneGalleryUnitState extends State<PhoneGalleryUnit> {
   }
 
   Widget _buildDiver() => Container(
-    margin: const EdgeInsets.only(bottom: 12, left: 48, right: 48, top: 10),
+        margin: const EdgeInsets.only(bottom: 12, left: 48, right: 48, top: 10),
         height: 2,
         child: ValueListenableBuilder(
           valueListenable: factor,
@@ -243,6 +240,4 @@ class _PhoneGalleryUnitState extends State<PhoneGalleryUnit> {
     int result = offset % length;
     return result < 0 ? length + result : result;
   }
-
-
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'painter.dart';
 import 'config.dart';
 
-
 class BufengPanel extends StatefulWidget {
   const BufengPanel({Key? key}) : super(key: key);
 

@@ -48,13 +48,12 @@ class Line with ChangeNotifier {
     notifyListeners();
   }
 
-
-
-  Offset percent(double percent){
+  Offset percent(double percent) {
     return Offset(
-        length*percent*cos(rad),
-        length*percent*sin(rad),
-    )+start;
+          length * percent * cos(rad),
+          length * percent * sin(rad),
+        ) +
+        start;
   }
 
   void _rotateByStart(double rotate) {

@@ -14,9 +14,7 @@ class Line {
   bool isActive(double gap) {
     int gapIndex0 = p0.dy ~/ gap;
     int gapIndex1 = p1.dy < 0 ? -1 : p1.dy ~/ gap;
-    return gapIndex0 != gapIndex1 ||
-        p0.dy % gap < 0.000000001 ||
-        p1.dy % gap < 0.000000001;
+    return gapIndex0 != gapIndex1 || p0.dy % gap < 0.000000001 || p1.dy % gap < 0.000000001;
   }
 }
 

@@ -36,7 +36,6 @@ class _ParticleSplitState extends State<ParticleSplit> with SingleTickerProvider
     // });
   }
 
-
   @override
   void dispose() {
     _controller.dispose();
@@ -54,7 +53,7 @@ class _ParticleSplitState extends State<ParticleSplit> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (_,constraints){
+      builder: (_, constraints) {
         pm.size = constraints.biggest;
         return GestureDetector(
           // onDoubleTap: (){
@@ -76,10 +75,9 @@ class _ParticleSplitState extends State<ParticleSplit> with SingleTickerProvider
         );
       },
     );
-
   }
 
-  void initParticle(){
+  void initParticle() {
     pm.particles.clear();
     pm.addParticle(Particle(
         color: Colors.blue,

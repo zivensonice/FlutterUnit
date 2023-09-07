@@ -16,9 +16,8 @@ class ClockWidget extends StatefulWidget {
   _ClockWidgetState createState() => _ClockWidgetState();
 }
 
-class _ClockWidgetState extends State<ClockWidget>
-    with SingleTickerProviderStateMixin {
- late Ticker _ticker;
+class _ClockWidgetState extends State<ClockWidget> with SingleTickerProviderStateMixin {
+  late Ticker _ticker;
   ValueNotifier<DateTime> time = ValueNotifier<DateTime>(DateTime.now());
 
   @override
@@ -42,20 +41,20 @@ class _ClockWidgetState extends State<ClockWidget>
 
   @override
   Widget build(BuildContext context) {
-    return  Stack(
+    return Stack(
       alignment: Alignment.center,
-        children: [
-          CustomPaint(
+      children: [
+        CustomPaint(
+          size: Size(widget.radius * 2, widget.radius * 2),
+          painter: ClockBgPainter(radius: widget.radius),
+        ),
+        RepaintBoundary(
+          child: CustomPaint(
             size: Size(widget.radius * 2, widget.radius * 2),
-            painter: ClockBgPainter(radius: widget.radius),
+            painter: ClockPainter(listenable: time, radius: widget.radius),
           ),
-          RepaintBoundary(
-            child: CustomPaint(
-              size: Size(widget.radius * 2, widget.radius * 2),
-              painter: ClockPainter(listenable: time, radius: widget.radius),
-            ),
-          )
-        ],
+        )
+      ],
     );
   }
 }
@@ -69,7 +68,6 @@ class ClockBgPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-
     canvas.translate(size.width / 2, size.height / 2);
     drawOuterCircle(canvas);
     drawScale(canvas);
@@ -98,23 +96,12 @@ class ClockBgPainter extends CustomPainter {
   void _paintArc(Canvas canvas) {
     arcPaint.maskFilter = MaskFilter.blur(BlurStyle.solid, logic1);
     final Path circlePath = Path()
-      ..addArc(
-          Rect.fromCenter(
-              center: const Offset(0, 0), width: radius * 2, height: radius * 2),
-          10 / 180 * pi,
-          pi / 2 - 20 / 180 * pi);
+      ..addArc(Rect.fromCenter(center: const Offset(0, 0), width: radius * 2, height: radius * 2), 10 / 180 * pi, pi / 2 - 20 / 180 * pi);
 
     Path circlePath2 = Path()
-      ..addArc(
-          Rect.fromCenter(
-              center: Offset(-logic1, 0),
-              width: radius * 2,
-              height: radius * 2),
-          10 / 180 * pi,
-          pi / 2 - 20 / 180 * pi);
+      ..addArc(Rect.fromCenter(center: Offset(-logic1, 0), width: radius * 2, height: radius * 2), 10 / 180 * pi, pi / 2 - 20 / 180 * pi);
     //联合路径
-    Path result =
-        Path.combine(PathOperation.difference, circlePath, circlePath2);
+    Path result = Path.combine(PathOperation.difference, circlePath, circlePath2);
     canvas.drawPath(result, arcPaint); //绘制
   }
 
@@ -131,18 +118,13 @@ class ClockBgPainter extends CustomPainter {
         _paint
           ..strokeWidth = longLineWidth
           ..color = Colors.blue;
-        canvas.drawLine(Offset(radius - scaleSpace, 0),
-            Offset(radius - scaleSpace - longScaleLen, 0), _paint);
-        canvas.drawCircle(
-            Offset(radius - scaleSpace - longScaleLen - logic1 * 5, 0),
-            longLineWidth,
-            _paint..color = Colors.orange);
+        canvas.drawLine(Offset(radius - scaleSpace, 0), Offset(radius - scaleSpace - longScaleLen, 0), _paint);
+        canvas.drawCircle(Offset(radius - scaleSpace - longScaleLen - logic1 * 5, 0), longLineWidth, _paint..color = Colors.orange);
       } else {
         _paint
           ..strokeWidth = shortLenWidth
           ..color = Colors.black;
-        canvas.drawLine(Offset(radius - scaleSpace, 0),
-            Offset(radius - scaleSpace - shortScaleLen, 0), _paint);
+        canvas.drawLine(Offset(radius - scaleSpace, 0), Offset(radius - scaleSpace - shortScaleLen, 0), _paint);
       }
       canvas.rotate(perAngle);
     }
@@ -165,8 +147,7 @@ class ClockBgPainter extends CustomPainter {
   // 长刻度线宽
   double get longLineWidth => logic1 * 2;
 
-  final TextPainter _textPainter = TextPainter(
-      textAlign: TextAlign.center, textDirection: TextDirection.ltr);
+  final TextPainter _textPainter = TextPainter(textAlign: TextAlign.center, textDirection: TextDirection.ltr);
 
   void drawText(Canvas canvas) {
     _drawCircleText(canvas, 'Ⅸ', offsetX: -radius);
@@ -176,28 +157,16 @@ class ClockBgPainter extends CustomPainter {
     _drawLogoText(canvas, offsetY: -radius * 0.5);
   }
 
-  _drawCircleText(Canvas canvas, String text,
-      {double offsetX = 0, double offsetY = 0}) {
-    _textPainter.text = TextSpan(
-        text: text,
-        style: TextStyle(fontSize: radius * 0.15, color: Colors.blue));
+  _drawCircleText(Canvas canvas, String text, {double offsetX = 0, double offsetY = 0}) {
+    _textPainter.text = TextSpan(text: text, style: TextStyle(fontSize: radius * 0.15, color: Colors.blue));
     _textPainter.layout();
-    _textPainter.paint(
-        canvas,
-        Offset.zero.translate(-_textPainter.size.width / 2 + offsetX,
-            -_textPainter.height / 2 + offsetY));
+    _textPainter.paint(canvas, Offset.zero.translate(-_textPainter.size.width / 2 + offsetX, -_textPainter.height / 2 + offsetY));
   }
 
   _drawLogoText(Canvas canvas, {double offsetX = 0, double offsetY = 0}) {
-    _textPainter.text = TextSpan(
-        text: 'Toly',
-        style: TextStyle(
-            fontSize: radius * 0.2, color: Colors.blue, fontFamily: 'CHOPS'));
+    _textPainter.text = TextSpan(text: 'Toly', style: TextStyle(fontSize: radius * 0.2, color: Colors.blue, fontFamily: 'CHOPS'));
     _textPainter.layout();
-    _textPainter.paint(
-        canvas,
-        Offset.zero.translate(-_textPainter.size.width / 2 + offsetX,
-            -_textPainter.height / 2 + offsetY));
+    _textPainter.paint(canvas, Offset.zero.translate(-_textPainter.size.width / 2 + offsetX, -_textPainter.height / 2 + offsetY));
   }
 }
 
@@ -207,12 +176,10 @@ class ClockPainter extends CustomPainter {
   final double radius;
   final ValueListenable<DateTime> listenable;
 
-  ClockPainter({required this.listenable, this.radius = 100})
-      : super(repaint: listenable);
+  ClockPainter({required this.listenable, this.radius = 100}) : super(repaint: listenable);
 
   @override
   void paint(Canvas canvas, Size size) {
-
     canvas.translate(size.width / 2, size.height / 2);
     drawArrow(canvas, listenable.value);
   }
@@ -308,11 +275,7 @@ class ClockPainter extends CustomPainter {
 
     canvas.save();
     canvas.rotate((360 - 270) / 2 / 180 * pi);
-    path.addArc(
-        Rect.fromPoints(
-            Offset(-logic1 * 9, -logic1 * 9), Offset(logic1 * 9, logic1 * 9)),
-        0,
-        270 / 180 * pi);
+    path.addArc(Rect.fromPoints(Offset(-logic1 * 9, -logic1 * 9), Offset(logic1 * 9, logic1 * 9)), 0, 270 / 180 * pi);
     canvas.drawPath(path, _paint);
     canvas.restore();
 

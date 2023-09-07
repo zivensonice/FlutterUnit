@@ -17,8 +17,7 @@ class ClockWidget extends StatefulWidget {
   _ClockWidgetState createState() => _ClockWidgetState();
 }
 
-class _ClockWidgetState extends State<ClockWidget>
-    with SingleTickerProviderStateMixin {
+class _ClockWidgetState extends State<ClockWidget> with SingleTickerProviderStateMixin {
   late Ticker _ticker;
   late ClockFx _fx;
 
@@ -48,9 +47,9 @@ class _ClockWidgetState extends State<ClockWidget>
 
   @override
   Widget build(BuildContext context) {
-    return  CustomPaint(
-        size: Size(widget.radius * 2, widget.radius * 2),
-        painter: ClockFxPainter(fx: _fx),
+    return CustomPaint(
+      size: Size(widget.radius * 2, widget.radius * 2),
+      painter: ClockFxPainter(fx: _fx),
     );
   }
 }
@@ -80,6 +79,5 @@ class ClockFxPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant ClockFxPainter oldDelegate) =>
-      oldDelegate.fx != fx;
+  bool shouldRepaint(covariant ClockFxPainter oldDelegate) => oldDelegate.fx != fx;
 }

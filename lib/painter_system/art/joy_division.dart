@@ -13,10 +13,8 @@ class _JoyDivisionState extends State<JoyDivision> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        setState(() {
-
-        });
+      onTap: () {
+        setState(() {});
       },
       child: CustomPaint(
         painter: JoyDivisionPainter(),
@@ -69,5 +67,4 @@ class JoyDivisionPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(JoyDivisionPainter oldDelegate) => true;
-  
 }

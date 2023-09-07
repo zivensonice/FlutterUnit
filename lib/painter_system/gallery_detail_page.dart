@@ -6,7 +6,6 @@ import 'package:components/toly_ui/toly_ui.dart';
 
 import 'package:flutter_unit/painter_system/gallery_card_item.dart';
 
-
 /// create by 张风捷特烈 on 2020/12/4
 /// contact me by email 1981462002@qq.com
 /// 说明:
@@ -15,8 +14,7 @@ class GalleryDetailPage extends StatefulWidget {
   final GalleryInfo galleryInfo;
   final List<Widget> children;
 
-  const GalleryDetailPage({Key? key,required this.galleryInfo, this.children = const []})
-      : super(key: key);
+  const GalleryDetailPage({Key? key, required this.galleryInfo, this.children = const []}) : super(key: key);
 
   @override
   _GalleryDetailPageState createState() => _GalleryDetailPageState();
@@ -48,8 +46,7 @@ class _GalleryDetailPageState extends State<GalleryDetailPage> {
 
   // 顶部 bar 圆角装饰
   BoxDecoration get topBoxDecoration => BoxDecoration(
-      image: DecorationImage(
-          fit: BoxFit.cover, image: AssetImage(widget.galleryInfo.image)),
+      image: DecorationImage(fit: BoxFit.cover, image: AssetImage(widget.galleryInfo.image)),
       borderRadius: const BorderRadius.only(
         bottomLeft: Radius.circular(10),
         bottomRight: Radius.circular(10),
@@ -75,9 +72,7 @@ class _GalleryDetailPageState extends State<GalleryDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value:const SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.light
-        ),
+        value: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
         child: Column(
           children: [
             Expanded(
@@ -156,8 +151,7 @@ class _GalleryDetailPageState extends State<GalleryDetailPage> {
             child: Container(
               width: 35,
               height: 35,
-              decoration:
-                  BoxDecoration(color: btnColor, shape: BoxShape.circle),
+              decoration: BoxDecoration(color: btnColor, shape: BoxShape.circle),
               child: const Icon(Icons.navigate_next, color: Colors.white),
               // height: 60,
             )));
@@ -167,8 +161,7 @@ class _GalleryDetailPageState extends State<GalleryDetailPage> {
   void _switchPrevPage() {
     if (widget.children.isNotEmpty) {
       int page = (_currentIndex.value - 1) % widget.children.length;
-      _ctrl.animateToPage(page,
-          duration: const Duration(milliseconds: 500), curve: Curves.linear);
+      _ctrl.animateToPage(page, duration: const Duration(milliseconds: 500), curve: Curves.linear);
     }
   }
 
@@ -176,21 +169,21 @@ class _GalleryDetailPageState extends State<GalleryDetailPage> {
   void _switchNextPage() {
     if (widget.children.isNotEmpty) {
       int page = (_currentIndex.value + 1) % widget.children.length;
-      _ctrl.animateToPage(page,
-          duration: const Duration(milliseconds: 500), curve: Curves.linear);
+      _ctrl.animateToPage(page, duration: const Duration(milliseconds: 500), curve: Curves.linear);
     }
   }
 
   bool isDesk = Platform.isMacOS || Platform.isWindows || Platform.isLinux;
 
-
   Widget buildTitle(BuildContext context) {
     return Container(
-      padding:  EdgeInsets.only(top: isDesk?26:46, bottom: 10, left: isDesk?20:0, right: 10),
+      padding: EdgeInsets.only(top: isDesk ? 26 : 46, bottom: 10, left: isDesk ? 20 : 0, right: 10),
       child: Row(
         children: [
           // if(isDesk)
-          const BackButton(color: Colors.white,),
+          const BackButton(
+            color: Colors.white,
+          ),
 
           Text(
             widget.galleryInfo.name,
@@ -198,12 +191,7 @@ class _GalleryDetailPageState extends State<GalleryDetailPage> {
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
-                shadows: [
-                  Shadow(
-                      color: Theme.of(context).primaryColor,
-                      offset: const Offset(.2, .2),
-                      blurRadius: .5)
-                ]),
+                shadows: [Shadow(color: Theme.of(context).primaryColor, offset: const Offset(.2, .2), blurRadius: .5)]),
           ),
           const Spacer(),
           ValueListenableBuilder<int>(
@@ -216,14 +204,15 @@ class _GalleryDetailPageState extends State<GalleryDetailPage> {
   }
 
   Widget _buildIndicatorText(BuildContext context, int value, Widget? child) {
-    String indicatorText =
-        "${widget.children.isNotEmpty ? (value + 1) : 0} / ${widget.children.length}";
+    String indicatorText = "${widget.children.isNotEmpty ? (value + 1) : 0} / ${widget.children.length}";
 
     return Text(
       indicatorText,
-      style: const TextStyle(shadows: [
-        Shadow(color: Colors.black, offset: Offset(.2, .2), blurRadius: .5)
-      ], fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+      style: const TextStyle(
+          shadows: [Shadow(color: Colors.black, offset: Offset(.2, .2), blurRadius: .5)],
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 20),
     );
   }
 }

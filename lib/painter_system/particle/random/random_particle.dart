@@ -19,7 +19,7 @@ class RandomParticle extends StatefulWidget {
 }
 
 class _RandomParticleState extends State<RandomParticle> with SingleTickerProviderStateMixin {
- late AnimationController _controller;
+  late AnimationController _controller;
   ParticleManage pm = ParticleManage();
   Random random = Random();
   Timer? _timer;
@@ -28,18 +28,18 @@ class _RandomParticleState extends State<RandomParticle> with SingleTickerProvid
   void initState() {
     super.initState();
 
-
-    _timer =Timer.periodic(const Duration(seconds: 1),addParticle);
+    _timer = Timer.periodic(const Duration(seconds: 1), addParticle);
 
     _controller = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: this,
-    )..addListener(pm.tick)
-        ..repeat();
+    )
+      ..addListener(pm.tick)
+      ..repeat();
   }
 
-  void addParticle(Timer timer){
-    if(pm.particles.length>20){
+  void addParticle(Timer timer) {
+    if (pm.particles.length > 20) {
       timer.cancel();
     }
     pm.addParticle(Particle(
@@ -52,7 +52,11 @@ class _RandomParticleState extends State<RandomParticle> with SingleTickerProvid
         y: 100));
   }
 
-  Color randomRGB({int limitR = 0, int limitG = 0, int limitB = 0,}) {
+  Color randomRGB({
+    int limitR = 0,
+    int limitG = 0,
+    int limitB = 0,
+  }) {
     var r = limitR + random.nextInt(256 - limitR); //红值
     var g = limitG + random.nextInt(256 - limitG); //绿值
     var b = limitB + random.nextInt(256 - limitB); //蓝值
@@ -77,7 +81,7 @@ class _RandomParticleState extends State<RandomParticle> with SingleTickerProvid
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (_,constraints){
+      builder: (_, constraints) {
         pm.size = constraints.biggest;
         return GestureDetector(
           onTap: theWorld,

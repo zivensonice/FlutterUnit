@@ -36,8 +36,7 @@ class _RandomPortraitState extends State<RandomPortrait> {
         onTap: () {
           setState(() {});
         },
-        child: CustomPaint(
-            painter: PortraitPainter(positions, blockCount: blockCount)));
+        child: CustomPaint(painter: PortraitPainter(positions, blockCount: blockCount)));
   }
 
   void _initPosition() {
@@ -69,14 +68,11 @@ class PortraitPainter extends CustomPainter {
 
   final pd = 20.0;
 
-  PortraitPainter(this.positions,
-      {this.blockCount = 9, this.color = Colors.blue})
-      : _paint = Paint()..color = color;
+  PortraitPainter(this.positions, {this.blockCount = 9, this.color = Colors.blue}) : _paint = Paint()..color = color;
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.clipRect(
-        Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
+    canvas.clipRect(Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
 
     final double perW = (size.width - pd * 2) / (blockCount);
     final double perH = (size.height - pd * 2) / (blockCount);
@@ -88,10 +84,7 @@ class PortraitPainter extends CustomPainter {
   }
 
   void _drawBlock(double dW, double dH, Canvas canvas, Position position) {
-    canvas.drawRect(
-        Rect.fromLTWH(position.x * dW.floor() * 1.0,
-            position.y * dH.floor() * 1.0, dW.floor() * 1.0, dH.floor() * 1.0),
-        _paint);
+    canvas.drawRect(Rect.fromLTWH(position.x * dW.floor() * 1.0, position.y * dH.floor() * 1.0, dW.floor() * 1.0, dH.floor() * 1.0), _paint);
   }
 
   @override

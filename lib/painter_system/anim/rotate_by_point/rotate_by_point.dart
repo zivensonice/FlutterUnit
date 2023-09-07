@@ -12,9 +12,7 @@ class RotateByPointWidget extends StatefulWidget {
   State<RotateByPointWidget> createState() => _RotateByPointWidgetState();
 }
 
-class _RotateByPointWidgetState extends State<RotateByPointWidget>
-    with SingleTickerProviderStateMixin {
-
+class _RotateByPointWidgetState extends State<RotateByPointWidget> with SingleTickerProviderStateMixin {
   Line line = Line(start: const Offset(20, 20), end: const Offset(50, 80));
 
   late AnimationController ctrl;
@@ -37,12 +35,11 @@ class _RotateByPointWidgetState extends State<RotateByPointWidget>
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: () => ctrl.forward(from: 0),
       child: CustomPaint(
         painter: AnglePainter(line: line),
-        size: const Size(200,200),
+        size: const Size(200, 200),
       ),
     );
   }

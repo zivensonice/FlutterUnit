@@ -18,12 +18,12 @@ class PiPainter extends CustomPainter {
       canvas,
       Offset.zero,
     );
-    canvas.translate(0, size.height*0.3);
+    canvas.translate(0, size.height * 0.3);
 
     canvas.save();
     for (int i = 0; i <= config.lineCount; i++) {
       canvas.drawLine(Offset.zero, Offset(size.width, 0), paint);
-      print(span*i);
+      print(span * i);
       canvas.translate(0, span);
     }
     canvas.restore();
@@ -40,8 +40,6 @@ class PiPainter extends CustomPainter {
       }
       canvas.drawLine(line.p0, line.p1, needlePaint);
     }
-
-
   }
 
   @override

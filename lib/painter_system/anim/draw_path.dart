@@ -16,7 +16,7 @@ class DrawPath extends StatefulWidget {
 }
 
 class _DrawPathState extends State<DrawPath> with SingleTickerProviderStateMixin {
- late AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -113,18 +113,14 @@ class PaperPainter extends CustomPainter {
       path.quadraticBezierTo(p2.dx, p2.dy, xc, yc);
     }
 
-
-
     PathMetrics pms = path.computeMetrics();
     for (PathMetric pm in pms) {
       Tangent? tangent = pm.getTangentForOffset(pm.length * repaint.value);
       canvas.drawPath(pm.extractPath(0, pm.length * repaint.value), paint);
-      canvas.drawCircle(
-          tangent?.position??Offset.zero, 5, Paint()..color = Colors.blue);
+      canvas.drawCircle(tangent?.position ?? Offset.zero, 5, Paint()..color = Colors.blue);
     }
   }
 
   @override
-  bool shouldRepaint(PaperPainter oldDelegate) =>
-      oldDelegate.repaint != repaint;
+  bool shouldRepaint(PaperPainter oldDelegate) => oldDelegate.repaint != repaint;
 }

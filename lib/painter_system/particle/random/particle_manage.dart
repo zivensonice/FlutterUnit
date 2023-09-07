@@ -11,7 +11,7 @@ class ParticleManage with ChangeNotifier {
 
   Size size;
 
-  ParticleManage({ this.size = Size.zero});
+  ParticleManage({this.size = Size.zero});
 
   void addParticle(Particle particle) {
     particles.add(particle);
@@ -29,25 +29,24 @@ class ParticleManage with ChangeNotifier {
     p.x += p.vx;
     p.y += p.vy;
 
-    if(p.x>size.width-p.size){
-      p.x = size.width-p.size;
+    if (p.x > size.width - p.size) {
+      p.x = size.width - p.size;
       p.vx = -p.vx;
     }
 
-    if(p.x < p.size){
+    if (p.x < p.size) {
       p.x = p.size;
       p.vx = -p.vx;
     }
 
-    if(p.y > size.height-p.size){
-      p.y = size.height-p.size;
+    if (p.y > size.height - p.size) {
+      p.y = size.height - p.size;
       p.vy = -p.vy;
     }
-    if(p.y < p.size){
+    if (p.y < p.size) {
       p.y = p.size;
       p.vy = -p.vy;
     }
-
   }
 
   void reset() {

@@ -34,8 +34,7 @@ class _DrawPictureState extends State<DrawPicture> {
   //读取 assets 中的图片
   Future<ui.Image> loadImageFromAssets(String path) async {
     ByteData data = await rootBundle.load(path);
-    List<int> bytes =
-        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     return decodeImageFromList(Uint8List.fromList(bytes));
   }
 
@@ -71,8 +70,7 @@ class PaperPainter extends CustomPainter {
     double step = 10.0;
     for (int i = 1; i <= size.height / step; i++) {
       canvas.drawLine(Offset(step * i, 0), Offset(0, step * i), _paint);
-      canvas.drawLine(
-          Offset(step * i, size.height), Offset(size.width, step * i), _paint);
+      canvas.drawLine(Offset(step * i, size.height), Offset(size.width, step * i), _paint);
     }
   }
 
@@ -80,10 +78,7 @@ class PaperPainter extends CustomPainter {
     if (image != null) {
       canvas.drawImageRect(
           image!,
-          Rect.fromCenter(
-              center: Offset(image!.width / 2, image!.height / 2),
-              width: image!.width * 1.0,
-              height: image!.width * 1.0),
+          Rect.fromCenter(center: Offset(image!.width / 2, image!.height / 2), width: image!.width * 1.0, height: image!.width * 1.0),
           Rect.fromLTRB(0, 0, size.width, size.height),
           _paint);
     }

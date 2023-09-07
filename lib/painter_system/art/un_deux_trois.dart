@@ -13,10 +13,8 @@ class _UnDeuxTroisState extends State<UnDeuxTrois> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        setState(() {
-
-        });
+      onTap: () {
+        setState(() {});
       },
       child: CustomPaint(
         painter: UnDeuxTroisPainter(),
@@ -74,5 +72,4 @@ class UnDeuxTroisPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(UnDeuxTroisPainter oldDelegate) => true;
-
 }

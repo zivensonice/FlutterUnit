@@ -20,10 +20,9 @@ class PolarPainter extends CustomPainter {
     textDirection: TextDirection.ltr,
   );
 
-
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color=Colors.blue;
+    Paint paint = Paint()..color = Colors.blue;
     canvas.translate(size.width / 2, size.height / 2);
     drawHelp(canvas, size);
     collect().forEach((Polar2D point) {
@@ -55,14 +54,10 @@ class PolarPainter extends CustomPainter {
 
     dashPainter.paint(canvas, helpPath, helpPaint);
 
-    drawHelpText('90°', canvas, Offset(0 - 8, size.height*0.85 / 2),
-        color: Colors.black);
-    drawHelpText('180°', canvas, Offset(-size.width*0.8 / 2 - 30, 0 - 8),
-        color: Colors.black);
-    drawHelpText('270°', canvas, Offset(0 - 8, -size.height*0.85 / 2 - 16),
-        color: Colors.black);
-    drawHelpText('0°', canvas, Offset(size.width*0.85 / 2 + 10, 0 - 8),
-        color: Colors.black);
+    drawHelpText('90°', canvas, Offset(0 - 8, size.height * 0.85 / 2), color: Colors.black);
+    drawHelpText('180°', canvas, Offset(-size.width * 0.8 / 2 - 30, 0 - 8), color: Colors.black);
+    drawHelpText('270°', canvas, Offset(0 - 8, -size.height * 0.85 / 2 - 16), color: Colors.black);
+    drawHelpText('0°', canvas, Offset(size.width * 0.85 / 2 + 10, 0 - 8), color: Colors.black);
   }
 
   void drawHelpText(
@@ -73,7 +68,7 @@ class PolarPainter extends CustomPainter {
   }) {
     textPainter.text = TextSpan(
       text: text,
-      style: TextStyle(fontSize: 11, color: color,fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.bold),
     );
     textPainter.layout(maxWidth: 200);
     textPainter.paint(canvas, offset);

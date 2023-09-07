@@ -15,10 +15,8 @@ class _HypnoticSquaresState extends State<HypnoticSquares> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        setState(() {
-
-        });
+      onTap: () {
+        setState(() {});
       },
       child: CustomPaint(
         painter: HypnoticSquaresPainter(),

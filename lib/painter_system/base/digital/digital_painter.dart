@@ -11,10 +11,11 @@ class DigitalPainter extends CustomPainter {
   final DigitalPath digitalPath;
   late Paint _mainPainter;
 
-  DigitalPainter({required this.value,required this.digitalPath,required this.color}){
-    _mainPainter = Paint()..style=PaintingStyle.fill..color=color;
+  DigitalPainter({required this.value, required this.digitalPath, required this.color}) {
+    _mainPainter = Paint()
+      ..style = PaintingStyle.fill
+      ..color = color;
   }
-
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'digital_path.dart';
 import 'digital_widget.dart';
@@ -27,13 +26,14 @@ class _DigitalShowerState extends State<DigitalShower> {
       ),
       body: Center(
           child: MultiDigitalWidget(
-            colors: [Colors.indigo,],
+        colors: [
+          Colors.indigo,
+        ],
         width: 50,
         spacing: 16,
         count: 4,
         value: _count,
-      )
-          ),
+      )),
     );
   }
 }

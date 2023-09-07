@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'angle_painter.dart';
 
@@ -9,7 +8,7 @@ class PolarPainterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: PolarPainter(),
-      size: const Size(200,200),
+      size: const Size(200, 200),
     );
   }
 }

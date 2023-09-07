@@ -61,8 +61,6 @@ class AnglePainter extends CustomPainter {
       ),
     );
 
-
-
     // canvas.drawArc(
     //   Rect.fromCenter(center: line.start, width: 20, height: 20),
     //   0,

@@ -13,4 +13,3 @@ const List<Color> colors = [
   Color(0xffffc168),
   Color(0xff050f2c),
 ];
-

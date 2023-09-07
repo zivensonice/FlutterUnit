@@ -13,10 +13,8 @@ class _CubicDisarrayState extends State<CubicDisarray> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        setState(() {
-
-        });
+      onTap: () {
+        setState(() {});
       },
       child: CustomPaint(
         painter: CubicDisarrayPainter(),
@@ -50,20 +48,10 @@ class CubicDisarrayPainter extends CustomPainter {
     for (double i = squareSize; i <= canvasSize - squareSize; i += squareSize) {
       for (double j = squareSize; j <= canvasSize; j += squareSize) {
         double plusOrMinus = Random().nextBool() ? -1 : 1;
-        double rotateAmt = j /
-            canvasSize *
-            pi /
-            180 *
-            plusOrMinus *
-            Random().nextDouble() *
-            rotateMultiplier;
+        double rotateAmt = j / canvasSize * pi / 180 * plusOrMinus * Random().nextDouble() * rotateMultiplier;
 
         plusOrMinus = Random().nextBool() ? -1 : 1;
-        double translateAmt = j /
-            canvasSize *
-            plusOrMinus *
-            Random().nextDouble() *
-            randomDisplacement;
+        double translateAmt = j / canvasSize * plusOrMinus * Random().nextDouble() * randomDisplacement;
 
         canvas.save();
         canvas.translate(i + translateAmt + offset, j);
@@ -76,5 +64,4 @@ class CubicDisarrayPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CubicDisarrayPainter oldDelegate) => true;
-
 }

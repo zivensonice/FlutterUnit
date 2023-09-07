@@ -5,8 +5,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
-
 class DunDunPathPage extends StatefulWidget {
   const DunDunPathPage({Key? key}) : super(key: key);
 
@@ -14,11 +12,10 @@ class DunDunPathPage extends StatefulWidget {
   _DunDunPathPageState createState() => _DunDunPathPageState();
 }
 
-class _DunDunPathPageState extends State<DunDunPathPage>with SingleTickerProviderStateMixin {
+class _DunDunPathPageState extends State<DunDunPathPage> with SingleTickerProviderStateMixin {
   ui.Image? logo2Image;
 
   late AnimationController _controller;
-
 
   @override
   void initState() {
@@ -47,12 +44,12 @@ class _DunDunPathPageState extends State<DunDunPathPage>with SingleTickerProvide
     return Scaffold(
       body: Center(
         child: GestureDetector(
-          onTap: (){
+          onTap: () {
             _controller.reset();
             _controller.forward();
           },
           child: CustomPaint(
-            painter: DunDunPainter(logo2Image,_controller),
+            painter: DunDunPainter(logo2Image, _controller),
             size: const Size(200, 200),
           ),
         ),
@@ -62,11 +59,10 @@ class _DunDunPathPageState extends State<DunDunPathPage>with SingleTickerProvide
 }
 
 class DunDunPainter extends CustomPainter {
-
   final ui.Image? logo2Image;
   final Animation<double> repaint;
 
-  DunDunPainter(this.logo2Image,this.repaint):super(repaint: repaint);
+  DunDunPainter(this.logo2Image, this.repaint) : super(repaint: repaint);
 
   final Paint helpPaint = Paint()
     ..style = PaintingStyle.stroke
@@ -75,10 +71,9 @@ class DunDunPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (logo2Image!=null) {
-      Rect src2 = Rect.fromLTWH(
-          0, 0, logo2Image!.width.toDouble(), logo2Image!.height.toDouble());
-      Rect dst2 = const Rect.fromLTWH(85, 132, 899/27, 1066/27);
+    if (logo2Image != null) {
+      Rect src2 = Rect.fromLTWH(0, 0, logo2Image!.width.toDouble(), logo2Image!.height.toDouble());
+      Rect dst2 = const Rect.fromLTWH(85, 132, 899 / 27, 1066 / 27);
       canvas.drawImageRect(logo2Image!, src2, dst2, Paint());
     }
 
@@ -92,11 +87,8 @@ class DunDunPainter extends CustomPainter {
 
     canvas.save();
     Path eyePath = Path();
-    Matrix4 m = Matrix4.translationValues(46,-12, 0).multiplied(
-        Matrix4.rotationZ(45 / 180 * pi)
-    );
-    eyePath
-        .addOval(Rect.fromCenter(center: const Offset(0, 0), width: 32, height: 49));
+    Matrix4 m = Matrix4.translationValues(46, -12, 0).multiplied(Matrix4.rotationZ(45 / 180 * pi));
+    eyePath.addOval(Rect.fromCenter(center: const Offset(0, 0), width: 32, height: 49));
     eyePath = eyePath.transform(m.storage);
     canvas.restore();
 
@@ -109,7 +101,6 @@ class DunDunPainter extends CustomPainter {
     Path leftEyePath3 = Path();
     leftEyePath3.addOval(Rect.fromCenter(center: const Offset(51, -19), width: 4, height: 4));
 
-
     Path rightEyePath = Path();
     rightEyePath.addOval(Rect.fromCenter(center: const Offset(98, -14), width: 17, height: 17));
 
@@ -120,33 +111,83 @@ class DunDunPainter extends CustomPainter {
     rightEyePath3.addOval(Rect.fromCenter(center: const Offset(98, -19), width: 4, height: 4));
 
     Path nosePath = Path();
-    nosePath.moveTo(79, -0,);
-    nosePath.relativeLineTo(14, -14,);
-    nosePath.relativeLineTo(-28, 0,);
+    nosePath.moveTo(
+      79,
+      -0,
+    );
+    nosePath.relativeLineTo(
+      14,
+      -14,
+    );
+    nosePath.relativeLineTo(
+      -28,
+      0,
+    );
     nosePath.close();
-    Path clipCirclePath =Path();
-    clipCirclePath.addOval(Rect.fromCenter(center: const Offset(79, -10,), width: 14, height: 14));
+    Path clipCirclePath = Path();
+    clipCirclePath.addOval(Rect.fromCenter(
+        center: const Offset(
+          79,
+          -10,
+        ),
+        width: 14,
+        height: 14));
     nosePath = Path.combine(PathOperation.intersect, nosePath, clipCirclePath);
     Path smaliPath = Path();
-    smaliPath.moveTo(65, -0,);
+    smaliPath.moveTo(
+      65,
+      -0,
+    );
 
     smaliPath.quadraticBezierTo(78, 15, 90, 0);
-    smaliPath.quadraticBezierTo(78, 6, 65, 0,);
+    smaliPath.quadraticBezierTo(
+      78,
+      6,
+      65,
+      0,
+    );
 
-    Path colorfulPath =  Path();
-    colorfulPath.addOval(Rect.fromCenter(center: const Offset(72, -5,), width: 120, height: 110));
-    colorfulPath.addOval(Rect.fromCenter(center: const Offset(72, -5,), width: 110, height: 100));
-    colorfulPath.addOval(Rect.fromCenter(center: const Offset(72, -5,), width: 115, height: 110));
-    colorfulPath.addOval(Rect.fromCenter(center: const Offset(72, -5,), width: 120, height: 105));
-    colorfulPath.addOval(Rect.fromCenter(center: const Offset(72, -5,), width: 115, height: 105));
+    Path colorfulPath = Path();
+    colorfulPath.addOval(Rect.fromCenter(
+        center: const Offset(
+          72,
+          -5,
+        ),
+        width: 120,
+        height: 110));
+    colorfulPath.addOval(Rect.fromCenter(
+        center: const Offset(
+          72,
+          -5,
+        ),
+        width: 110,
+        height: 100));
+    colorfulPath.addOval(Rect.fromCenter(
+        center: const Offset(
+          72,
+          -5,
+        ),
+        width: 115,
+        height: 110));
+    colorfulPath.addOval(Rect.fromCenter(
+        center: const Offset(
+          72,
+          -5,
+        ),
+        width: 120,
+        height: 105));
+    colorfulPath.addOval(Rect.fromCenter(
+        center: const Offset(
+          72,
+          -5,
+        ),
+        width: 115,
+        height: 105));
 
     canvas.save();
     Path eyePath2 = Path();
-    Matrix4 m2 = Matrix4.translationValues(105,-12,0).multiplied(
-        Matrix4.rotationZ(-40 / 180 * pi)
-    );
-    eyePath2
-        .addOval(Rect.fromCenter(center: const Offset(0, 0), width: 29, height: 48));
+    Matrix4 m2 = Matrix4.translationValues(105, -12, 0).multiplied(Matrix4.rotationZ(-40 / 180 * pi));
+    eyePath2.addOval(Rect.fromCenter(center: const Offset(0, 0), width: 29, height: 48));
     eyePath2 = eyePath2.transform(m2.storage);
     canvas.restore();
     Path leftFootPath = buildFootPath();
@@ -155,16 +196,12 @@ class DunDunPainter extends CustomPainter {
     //爱心
     List<Offset> arr = [];
     int len = 50;
-    double a =1;
+    double a = 1;
     for (int i = 0; i < len; i++) {
       double step = (i / len) * (pi * 2); //递增的θ
       Offset offset = Offset(
-        a * (11 * pow(sin(step), 3)).toDouble() ,
-        -a *
-            (9 * cos(step) -
-                5 * cos(2 * step) -
-                2 * cos(3 * step) -
-                cos(4 * step)),
+        a * (11 * pow(sin(step), 3)).toDouble(),
+        -a * (9 * cos(step) - 5 * cos(2 * step) - 2 * cos(3 * step) - cos(4 * step)),
       );
       arr.add(offset);
     }
@@ -172,7 +209,7 @@ class DunDunPainter extends CustomPainter {
     for (int i = 0; i < len; i++) {
       starPath.lineTo(arr[i].dx, arr[i].dy);
     }
-    starPath = starPath.shift(const Offset(152,-20));
+    starPath = starPath.shift(const Offset(152, -20));
 
     dundunPath.addPath(bodyPath, Offset.zero);
     dundunPath.addPath(leftHandPath, Offset.zero);
@@ -239,9 +276,7 @@ class DunDunPainter extends CustomPainter {
     path.quadraticBezierTo(60, 125, 55, 98);
     path.quadraticBezierTo(35, 80, 18, 78);
 
-    Path right = path
-        .transform(Matrix4.diagonal3Values(-1, 1, 1).storage)
-        .shift(const Offset(128, 0));
+    Path right = path.transform(Matrix4.diagonal3Values(-1, 1, 1).storage).shift(const Offset(128, 0));
 
     return Path.combine(PathOperation.union, path, right);
   }
@@ -252,9 +287,7 @@ class DunDunPainter extends CustomPainter {
     path.quadraticBezierTo(8, -95, 40, -68);
     path.quadraticBezierTo(40, -55, 13, -40);
 
-    Path right = path
-        .transform(Matrix4.diagonal3Values(-1, 1, 1).storage)
-        .shift(const Offset(138, -5));
+    Path right = path.transform(Matrix4.diagonal3Values(-1, 1, 1).storage).shift(const Offset(138, -5));
 
     return Path.combine(PathOperation.union, path, right);
   }

@@ -35,14 +35,14 @@ class _NSidePageState extends State<NSidePage> {
             child: IconButton(
               onPressed: () {
                 setState(() {
-                  if(_count<=3)return;
+                  if (_count <= 3) return;
                   _count--;
                 });
               },
               icon: const Icon(Icons.remove),
             )),
         Positioned(
-          right: 0,
+            right: 0,
             top: 0,
             child: IconButton(
               onPressed: () {

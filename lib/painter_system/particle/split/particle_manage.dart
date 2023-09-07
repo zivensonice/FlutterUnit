@@ -14,7 +14,7 @@ class ParticleManage with ChangeNotifier {
 
   Size size;
 
-  ParticleManage({this.size=Size.zero});
+  ParticleManage({this.size = Size.zero});
 
   void setParticles(List<Particle> particles) {
     this.particles = particles;
@@ -38,13 +38,13 @@ class ParticleManage with ChangeNotifier {
     p.x += p.vx;
     p.y += p.vy;
 
-    if (p.x > size.width-p.size) {
-      p.x = size.width-p.size;
+    if (p.x > size.width - p.size) {
+      p.x = size.width - p.size;
 
       var newSize = p.size / 2;
-      if (newSize > 1) {// 如果尺寸小于 1 ，执行分裂
-        Particle p0 =
-        p.copyWith(size: newSize, vx: -p.vx, vy: -p.vy, color: randomRGB());
+      if (newSize > 1) {
+        // 如果尺寸小于 1 ，执行分裂
+        Particle p0 = p.copyWith(size: newSize, vx: -p.vx, vy: -p.vy, color: randomRGB());
         particles.add(p0);
         p.size = newSize;
         p.vx = -p.vx;
@@ -56,13 +56,12 @@ class ParticleManage with ChangeNotifier {
       p.vx = -p.vx;
     }
 
-    if (p.y > size.height-p.size) {
-      p.y = size.height-p.size;
+    if (p.y > size.height - p.size) {
+      p.y = size.height - p.size;
 
       var newSize = p.size / 2;
       if (newSize > 1) {
-        Particle p0 =
-            p.copyWith(size: newSize, vx: -p.vx, vy: -p.vy, color: randomRGB());
+        Particle p0 = p.copyWith(size: newSize, vx: -p.vx, vy: -p.vy, color: randomRGB());
         particles.add(p0);
         p.size = newSize;
         p.vy = -p.vy;
